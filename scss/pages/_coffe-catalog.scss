@@ -1,0 +1,156 @@
+.offer-header-section {
+  padding   : 40px 0;
+  background: $basic-color-selective_yellow;
+  position  : relative;
+  z-index   : 1;
+  overflow  : hidden;
+
+  &_color {
+    background: none;
+  }
+
+  @include responsive($sm) {
+    display: none;
+  }
+
+  &_card {
+    background: none;
+  }
+}
+
+.header-wrapper {
+  display: flex;
+  &_catalog{
+    margin-bottom: 100px;
+  }
+  @include responsive($lg) {
+    flex-direction: column;
+  }
+
+  h1 {
+    margin-top: 131px;
+    font-size : $h-font_size_large;
+    color     : $text-color-white;
+
+    @include responsive($lg) {
+      margin-top: 30px;
+      font-size : $h2-font_size;
+    }
+
+    @include responsive($md) {
+      margin-top: 30px;
+      font-size : 35px;
+    }
+
+    @include responsive($sm) {
+      margin-top: 0;
+    }
+  }
+}
+
+.coffe-catalog-img {
+  position: relative;
+  top     : -7rem;
+
+  @include responsive($lg) {
+    top: 0;
+  }
+}
+
+.coffe-catalog-img-bg {
+  position   : absolute;
+  width      : 920px;
+  height     : 745px;
+  bottom     : -10rem;
+  z-index    : -1;
+  margin-left: -55px;
+}
+
+.coffe-photo-catalig {
+  @include responsive($sm) {
+    display: none;
+  }
+}
+
+.header-breadcrumbs {
+  background-color: $basic-color-selective_yellow;
+}
+
+.card-coffe-catalog {
+  padding   : 40px 0;
+  overflow  : hidden;
+  background: $section-background;
+}
+
+.section-bg {
+  background: $section-background;
+  width     : 100%;
+  height    : 210px;
+  position  : absolute;
+  z-index   : -1;
+  top       : 107rem;
+
+  @include responsive($xxl) {
+    height: 400px;
+    top   : 105em;
+  }
+
+  @include responsive($xl) {
+    top: 132rem;
+  }
+
+  @include responsive($lg) {
+    top   : 151rem;
+    height: 600px;
+  }
+
+  @include responsive($md) {
+    display: none;
+  }
+}
+
+.coffe-catalog-wrapp {
+  display  : flex;
+  flex-wrap: wrap;
+  gap      : 60px;
+
+  @include responsive($xxl) {
+    gap: 30px;
+  }
+
+  @include responsive($xl) {
+    gap            : 40px;
+    justify-content: center;
+  }
+
+  @include responsive($md) {
+    gap: 60px;
+  }
+}
+
+.card-coffe_catalog {
+  max-width: 385px;
+
+  @include responsive($xxl) {
+    max-width: 350px;
+  }
+
+  @include responsive($xl) {
+    max-width: 400px;
+  }
+
+  @include responsive($lg) {
+    max-width: 325px;
+    margin   : 0;
+  }
+
+  @include responsive($md) {
+    max-width: 100%;
+  }
+}
+
+.card-coffe__photo {
+  @include responsive($breakpoint_sm) {
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,94 @@
+.accordion {
+  background-image: url("@img/faq-bg.png");
+  background-repeat: no-repeat;
+  background-size: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-position: left;
+  @include responsive($xl) {
+    background-size: 80%;
+  }
+  @include responsive($lg) {
+    background-image: none;
+  }
+}
+.accordion__item {
+  margin-bottom: 30px;
+  width: 650px;
+  max-width: 100%;
+  background: #ffffff;
+  box-shadow: 0px 0px 30px rgba(149, 149, 149, 0.25);
+  border-radius: 20px;
+}
+
+.accordion__header {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 130%;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.7s ease;
+  @include responsive($sm) {
+    font-size: $font-size_medium;
+    padding: 20px 30px;
+  }
+}
+.accordion__header:hover {
+  opacity: 0.8;
+  transition: opacity 0.7s ease;
+}
+.accordion__header::after {
+  content: "+";
+  flex-shrink: 0;
+  font-size: 55px;
+  //   width: 1.25rem;
+  //   height: 1.25rem;
+  //   margin-left: auto;
+  //   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  //   background-repeat: no-repeat;
+  //   background-size: 1.25rem;
+  //   content: "";
+  //   transition: transform 0.2s ease-out;
+}
+
+.accordion__item_show .accordion__header::after,
+.accordion__item_slidedown .accordion__header::after {
+  content: "-";
+  //   transform: rotate(-180deg);
+}
+
+.accordion__item:not(.accordion__item_show) .accordion__header {
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.accordion__content {
+  padding: 30px;
+  background: #fff;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  color: #222222;
+  max-width: 90%;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  @include responsive($sm) {
+    font-size: $text-font_size_small;
+    padding: 10px 30px 15px;
+  }
+  @include responsive($breakpoint_sm) {
+    padding: 0 30px 15px;
+  }
+  @include responsive($breakpoint-small) {
+    font-size: 16px;
+  }
+}
+
+.accordion__item:not(.accordion__item_show) .accordion__body {
+  display: none;
+}

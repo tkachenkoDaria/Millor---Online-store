@@ -1,0 +1,57 @@
+/* fonts*/
+@font-face {
+  font-family: "Gilroy";
+  src: url("../fonts/Gilroy-Normal.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Gilroy-Normal.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("../fonts/Gilroy-Normal.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../fonts/Gilroy-Normal.woff")
+      format("woff"),
+    /* Pretty Modern Browsers */ url("../fonts/Gilroy-Normal.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */ url("../fonts/Gilroy-Normal.svg#svgFontName")
+      format("svg"); /* Legacy iOS */
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("../fonts/Gilroy-SemiBold.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Gilroy-SemiBold.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("../fonts/Gilroy-SemiBold.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../fonts/Gilroy-SemiBold.woff")
+      format("woff"),
+    /* Pretty Modern Browsers */ url("../fonts/Gilroy-SemiBold.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */ url("../fonts/Gilroy-SemiBold.svg#svgFontName")
+      format("svg"); /* Legacy iOS */
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gilroy";
+  src: url("../fonts/Gilroy-Bold.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Gilroy-Bold.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("../fonts/Gilroy-Bold.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../fonts/Gilroy-Bold.woff") format("woff"),
+    /* Pretty Modern Browsers */ url("../fonts/Gilroy-Bold.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */ url("../fonts/Gilroy-Bold.svg#svgFontName")
+      format("svg"); /* Legacy iOS */
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("../fonts/Gilroy-Heavy.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Gilroy-Heavy.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("../fonts/Gilroy-Heavy.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../fonts/Gilroy-Heavy.woff") format("woff"),
+    /* Pretty Modern Browsers */ url("../fonts/Gilroy-Heavy.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */ url("../fonts/Gilroy-Heavy.svg#svgFontName")
+      format("svg"); /* Legacy iOS */
+  font-weight: 900;
+  font-display: swap;
+}

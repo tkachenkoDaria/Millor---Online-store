@@ -1,0 +1,136 @@
+/* advantage */
+.advantage {
+  background-color: #FFF7E1;
+  padding: 59px 0 118px;
+
+  @include responsive($lg) {
+    padding: 59px 0 60px;
+  }
+
+  @include responsive($md) {
+    padding: 40px 0;
+  }
+
+  @include responsive($breakpoint-small) {
+    padding: 25px 0;
+  }
+
+}
+
+
+.advantage-wrapper {
+  display: flex;
+  align-items: flex-end;
+
+  @include responsive($xl) {
+    display: block;
+  }
+}
+
+.advantage-img {
+  display: flex;
+  position: relative;
+
+  @include responsive($xxl) {
+    left: -9rem;
+  }
+
+  @include responsive($xl) {
+    display: none;
+  }
+
+  &__coffe {
+    position: relative;
+    filter: drop-shadow(5px 10px 10px rgba(0, 0, 0, 0.15));
+    position: relative;
+    z-index: 1;
+    object-fit: contain;
+  }
+
+  &__grain {
+    position: absolute;
+    left: 8px;
+    bottom: 33%;
+    object-fit: contain;
+  }
+}
+
+.advantage-info {
+  max-width: 590px;
+  margin-left: auto;
+
+  @include responsive($xl) {
+    max-width: 100%;
+    margin-left: 0;
+  }
+}
+
+.advantage-title {
+  margin-bottom: 80px;
+
+  @include responsive($sm) {
+    margin: 0 0 35px;
+  }
+}
+
+.advantage-inner {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 60px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  @include responsive($xl) {
+    justify-content: normal;
+  }
+
+  @include responsive($sm) {
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+
+  @include responsive($breakpoint_sm) {
+    margin-bottom: 15px;
+  }
+}
+
+.advantage-icon {
+  margin-right: 35px;
+  object-fit: contain;
+
+  @include responsive($sm) {
+    max-width: 150px;
+    margin: 0 auto 20px;
+  }
+}
+
+.advantage-list {
+  @include responsive($sm) {
+    text-align: center;
+  }
+
+  &__title {
+    font-weight: $text-weight_bold;
+    font-size: $text-font_size_large;
+    margin-bottom: 20px;
+
+    @include responsive($md) {
+      font-size: $h5-font_size;
+    }
+
+    @include responsive($sm) {
+      font-size: 22px;
+    }
+  }
+
+  &__desc {
+    max-width: 480px;
+
+    @include responsive($xl) {
+      max-width: 100%;
+      margin-left: 0;
+    }
+  }
+}

@@ -1,0 +1,129 @@
+/* speciffcation*/
+body {
+  font-family: "Gilroy";
+  font-weight: $text-weight_medium;
+  font-size: $text-font_size_big;
+  color: $color-black;
+  padding: 0;
+  margin: 0;
+
+  @include responsive($breakpoint-small) {
+    font-size: $font-size_medium;
+  }
+}
+
+h1 {
+  font-weight: $h-weight_bold;
+  font-size: 80px;
+
+  @include responsive($md) {
+    font-size: 40px;
+  }
+
+  @include responsive($sm) {
+    font-size: 35px;
+  }
+
+  @include responsive($breakpoint_small) {
+    font-size: 30px;
+  }
+}
+
+h2 {
+  @extend %h2;
+
+  @include responsive($md) {
+    font-size: 40px;
+  }
+
+  @include responsive($sm) {
+    font-size: 30px;
+  }
+
+  @include responsive($breakpoint_small) {
+    font-size: 25px;
+  }
+}
+
+h3 {
+  @extend %h3;
+}
+
+h4 {
+  @extend %h4;
+}
+
+h5 {
+  @extend %h5;
+}
+
+ul,
+li {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+input,
+button {
+  outline: none;
+  border: none;
+}
+
+input[type="search"]::-ms-clear {
+  /* нестандартный псевдоэлемент IE */
+  display: none;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  /* нестандартный псевдоэлемент WebKit/Blink, но Esc по-прежнему будет удалять раннее введённый текст */
+  display: none;
+}
+
+p {
+  @include responsive($md) {
+    font-size: $font-size_medium;
+  }
+
+  @include responsive($sm) {
+    font-size: $text-font_size_small;
+  }
+}
+
+.outofstock {
+  color: red;
+}
+
+.onsale {
+  background-color: $basic-color-hover_selective_yellow !important;
+}
+
+.not-found {
+  font-size: 14rem;
+  color: $basic-color-selective_yellow;
+
+  @include responsive($md) {
+    font-size: 8rem;
+  }
+}
+
+.error-404 {
+  text-align: center;
+}
+
+.icon {
+  display: inline-block;
+  // width: 1rem;
+  // height: 1rem;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}

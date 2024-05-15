@@ -1,0 +1,158 @@
+// title
+$h-weight_bold: 900;
+$h2-weight_bold: $h-weight_bold; //??? h2 = 900
+$h3-weight_bold: $h-weight_bold; // all-card-name h3 = 900
+$h4-h5-weight_bold: 700; // categoty-home-all
+// $h5-weight_bold: 700; // ccard-name h4 = 900
+
+$h-font_size: 80px;
+$h-font_size_large:70px;
+$h2-font_size: 50px;
+$h3-font_size: 40px;
+$h4-font_size: 30px;
+$h5-font_size: 25px;
+$h5-font_size_hover: 30px;
+
+$color-white: #fff;
+$color-black: #000;
+$color-мarden:#FFF7E1;
+$h3-color-mine_shaft: #222;
+
+// text
+$card-coffe-text-weight_bold: 900;
+$text-weight_bold: 700;
+$text-weight_medium: 500;
+$weight-semi_bold: 600;
+
+$text-card-coffe-font_size: 35px;
+$text-font_size_large: 30px;
+$text-font_size_big: 25px;
+$font-size_medium: 20px;
+$text-font_size_small: 18px;
+$text-font-size_tiny: 14px;
+
+$text-color-mine_shaft: #222;
+$text-color-silver_one: #c6c6c6;
+$text-color-white: #fff;
+$text-color-scorpion: #5b5b5b;
+$text-color-boulder: #747474;
+$text-color-scorpion: #5b5b5b;
+$text-color-gallery: #f0f0f0;
+$text-color-silver_one: #c6c6c6;
+$section-background:#F5F5F5;
+// ui
+
+// color
+$basic-color-selective_yellow: #f9b300;
+$basic-color-hover_selective_yellow: #e2a300;
+
+// input-mail
+$input-mail-font_size_big: 25px;
+$input-mail-text-weight_medium: 500;
+$input-mail-text-color-silver_two: #c9c9c9;
+$input-mail-border_radius_big: 40px;
+$input-mail-background-concrete: #f3f3f3;
+
+// input-card-amount
+$input-card-amount-border_radius_tiny: 5px;
+$input-card-amount-border: 1px solid #d6d6d6;
+$input-card-amount-weight-semi_bold: 600;
+$input-card-amount-text-font_size_big: 25px;
+$input-card-amount-color-silver_two: #c9c9c9;
+$input-card-amount-background-wild_sand: #f6f6f6;
+
+// input base
+$input-base-background-wild_sand: #f6f6f6;
+$input-base-color-silver_two: #c9c9c9;
+$input-base-font-size_medium: 20px;
+$input-base-text-weight_medium: 500;
+$input-base-border_radius_tiny: 5px;
+$input-base-border_number:1px solid #D6D6D6;
+
+// input delivery and promo code
+$input-delivery-and-promo-code-border: 1px solid #f6f6f6;
+$input-delivery-and-promo-code-border_radius_tiny: 5px;
+$input-delivery-and-promo-background_alabaster: #fcfcfc;
+$input-delivery-and-promo-silver: #c9c9c9;
+$input-delivery-and-promo-font-size_medium: 20px;
+$input-delivery-and-promo-text-weight_medium: 500;
+
+// button base
+$button-base-weight_bold: 700;
+$button-base-basic-color-selective_yellow: #f9b300;
+$button-base-basic-color-hover_selective_yellow: #e2a300;
+$button-base-text-font_size_large: 30px;
+$button-base-text-color-white: #fff;
+$button-base-border_radius_big: 40px;
+
+// button show more
+$button-show-more-background_white: #fff;
+$button-show-more-text-weight_medium: 500;
+$button-show-more-font-size_medium: 20px;
+$button-show-more-text_color_black: #000;
+$button-show-more-border_radius_tiny_tiny: 10px;
+$button-show-more-border: 1px solid #e4e4e4;
+$button-show-more-hover-background_white: #fff7e1;
+
+// button promo code
+$button-promo-code-background_white: #fff7e1;
+$button-promo-code_radius_tiny: 5px;
+$button-promo-code-border: 1px solid #f9b300;
+$button-promo-code-weight-semi_bold: 600;
+$button-promo-code-text-font_size_big: 25px;
+$button-promo-code-text_color_black: #f9b300;
+
+// link more
+$link-more-color-selective_yellow: #f9b300;
+$link-more_see-all-text-weight_medium: 500;
+$link-more_see-all-font-size_medium: 20px;
+$link-more_see-all-border_radius_mediuml: 30px;
+$link-more_see-all-hover-background-alabaster: #f9f9f9;
+$link-more-border_bottom: 1px solid #f9b300;
+// link see all
+$link-see-all-border_bottom: 1px solid #000;
+$link-see-all-text_color_black: #000;
+$link-see-all-hover-background-selective_yellow: #f9b300;
+
+// link menu
+$link-menu-text_color_black: #000;
+$link-menu-hover-border: 2px solid #f9b300;
+// responsive
+$xxl: 1399.98px;
+$xl: 1199.98px;
+$lg: 991.98px;
+$md: 767.98px;
+$sm: 575.98px;
+$breakpoint_sm: 450px;
+$breakpoint-small: 360px;
+$breakpoint_tiny: 321px;
+
+// card
+$card-box_shadow_one: 0px 0px 30px rgba(146, 146, 146, 0.2);
+$card-box_shadow_two: 0px 0px 20px rgba(146, 146, 146, 0.25);
+$card-box_shadow_coffe-filter:0px 0px 30px rgba(149, 149, 149, 0.25);
+$card-box_shadow_product-card:0px 0px 50px rgba(163, 163, 163, 0.25);
+$card-product_border:1px solid #E4E4E4;
+// search_header
+$search_header-border-radius: 30px;
+$search_header-border: 1px solid #e9e9e9;
+$search_header-color-cod_gray: #090909;
+// header
+$gamburger-line-color-mine_shaft: #222;
+$navbar-active-color-concrete: #f3f3f3;
+// category card
+$category-card-color-white: #fff;
+$category-card-border_radius: 20px;
+
+// border-radius
+$border_radius_card: 20px;
+$border_radius_ancor: 5px;
+$border_radius_circle_card-cofe: 50%;
+
+// text-align
+$text-align_right: right;
+$text-align_left: left;
+
+
+// checkbox
+$color-checkbox: #E4E4E4;

@@ -1,0 +1,102 @@
+/* news card*/
+.see-all {
+  @include link-more_see-all($link-see-all-text_color_black);
+  margin-top: 0;
+}
+
+.news-card {
+  display: flex;
+  box-shadow: $card-box_shadow_one;
+  border-radius: $border_radius_card;
+  margin-bottom: 20px;
+  min-height: 400px;
+
+  @include responsive($lg) {
+    width: 100%;
+    min-height: auto;
+  }
+
+  @include responsive($md) {
+    margin-bottom: 45px;
+    flex-direction: column;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+
+  &__photo {
+    border-radius: 20px 0px 0px 20px;
+    height: 100%;
+    max-width: 336px;
+    object-fit: contain;
+
+    @include responsive($lg) {
+      max-width: 250px;
+      object-fit: fill;
+    }
+
+    @include responsive($md) {
+      border-radius: 20px 20px 0 0;
+      height: 270px;
+      object-fit: cover;
+      max-width: 100%;
+      display: block;
+    }
+
+    @include responsive($sm) {
+      height: 200px;
+    }
+
+    @include responsive($breakpoint-small) {
+      height: 150px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    max-width: 459px;
+    justify-content: center;
+    padding: 25px 30px 10px;
+
+    @include responsive($lg) {
+      max-width: 100%;
+    }
+
+    @include responsive($sm) {
+      padding: 20px;
+    }
+
+    @include responsive($breakpoint-small) {
+      padding: 15px;
+    }
+  }
+
+  &__title {
+    font-size: 25px;
+    @include responsive($sm) {
+      font-size: 20px;
+    }
+  }
+
+  &__excerpt {
+    p {
+      font-size: 20px;
+      flex-grow: 1;
+      margin-top: 15px;
+
+      @include responsive($lg) {
+        flex-grow: 0;
+      }
+
+      @include responsive($sm) {
+        font-size: 18px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+    }
+
+  }
+}

@@ -1,0 +1,41 @@
+.tea-catalog-img{
+    max-width: 100%;
+    margin-left: 65px;
+    @include responsive($sm) {
+        display: none;
+    }
+}
+.tea-category-wrapp{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    // display: flex;
+    // flex-wrap: wrap;
+    // gap: 20px;
+    @include responsive($lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+.tea-category{
+    position: relative;
+    z-index: 1;
+    top: -4rem;
+    @include responsive($xl) {
+       position: static;
+       padding: 40px 0;
+    }
+}
+.section-bg_tea{
+    height: 700px;
+    top: 67rem;
+    @include responsive($xxl) {
+        height: 900px;
+        top: 69rem;
+    }
+    @include responsive($lg) {
+        top: 93rem;
+    }
+    @include responsive($md) {
+        display: none;
+    }
+}

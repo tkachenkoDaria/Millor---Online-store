@@ -1,0 +1,69 @@
+.ancor-link {
+  padding:0 0 85px;
+  @include responsive($lg) {
+    padding: 70px 0;
+  }
+  @include responsive($md) {
+    padding: 50px 0;
+  }
+  @include responsive($sm) {
+    padding: 30px 0;
+  }
+  @include responsive($sm) {
+    padding: 30px 0;
+    font-size: 20px;
+  }
+}
+.ancor-links{
+  position: sticky;
+  top: 0;
+  padding: 30px 0;
+  background: #fff;
+  margin-top: 70px;
+  z-index: 2;
+  @include responsive($sm){
+    position: static;
+  }
+}
+.ancor-wrapp {
+  display: flex;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  @include responsive($lg) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  @include responsive($sm) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.ancor {
+  background: $input-base-background-wild_sand;
+  border: 1px solid$input-base-color-silver_two;
+  border-radius: $border_radius_ancor;
+  font-weight: $weight-semi_bold;
+  color: $basic-color-selective_yellow;
+  text-align: center;
+  width: 400px;
+  padding: 15px;
+  transition: background 0.5s ease, border 0.5s ease;
+  &:hover,
+  &:visited {
+    color: $basic-color-selective_yellow;
+    background: $color-мarden;
+    border: 1px solid $basic-color-selective_yellow;
+    transition: background 0.5s ease, border 0.5s ease;
+  }
+  @include responsive($lg) {
+    width: 315px;
+    max-width: 100%;
+  }
+  @include responsive($md) {
+    max-width: 45%;
+  }
+  @include responsive($sm) {
+    max-width: 100%;
+  }
+}

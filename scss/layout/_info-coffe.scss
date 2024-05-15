@@ -1,0 +1,44 @@
+/* info-coffe */
+.info-coffe {
+  padding: 118px 0 95px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("@img/info-coffe/info-coffe_background.png") no-repeat center;
+  @include responsive($md) {
+    padding: 65px 0;
+  }
+  @include responsive($breakpoint_sm) {
+    padding: 35px 0;
+  }
+}
+.roasting-coffee__title {
+  color: $text-color-white;
+  margin-bottom: 100px;
+  @include responsive($md) {
+    margin-bottom: 50px;
+  }
+  @include responsive($sm) {
+    margin-bottom: 35px;
+  }
+  @include responsive($breakpoint_sm) {
+    margin-bottom: 15px;
+  }
+}
+.roasting-coffee__text {
+  color: $text-color-white;
+  max-width: 1246px;
+  &:last-of-type {
+    margin-bottom: 100px;
+    @include responsive($breakpoint_sm) {
+      margin-bottom: 35px;
+    }
+  }
+  @include responsive($md) {
+    max-width: 100%;
+  }
+  @include responsive($sm) {
+    margin-bottom: 0;
+  }
+  .roasting-coffee__text:last-of-type {
+    margin-bottom: 60px;
+  }
+}

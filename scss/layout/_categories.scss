@@ -1,0 +1,32 @@
+/* categories */
+// catalog
+.categories {
+  padding: 25px 0 45px;
+  @include responsive($md) {
+    padding: 25px 0;
+  }
+  h2 {
+    margin-bottom: 83px;
+    @include responsive($xl) {
+      margin-bottom: 45px;
+    }
+  }
+  @include responsive($xl) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+.categories-wrapp {
+  display: flex;
+  gap: 20px;
+
+  @include responsive($xl) {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    padding: 50px 10px;
+    justify-content: normal;
+  }
+  @include responsive($sm) {
+    padding: 20px 10px;
+  }
+}

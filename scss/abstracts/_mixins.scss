@@ -1,0 +1,195 @@
+// responsive
+@mixin responsive($size) {
+  @media (max-width: $size) {
+    @content;
+  }
+}
+
+%h2 {
+  font-weight: $h-weight_bold;
+  font-size: $h2-font_size;
+}
+
+%h3 {
+  font-weight: $h-weight_bold;
+  font-size: $h3-font_size;
+}
+
+%h4 {
+  font-weight: $h4-h5-weight_bold;
+  font-size: $h4-font_size;
+}
+
+%h5 {
+  font-weight: $h4-h5-weight_bold;
+  font-size: $h5-font_size;
+}
+
+%button-show_more {
+  background: $button-show-more-background_white;
+  color: $button-show-more-text_color_black;
+  font-size: $button-show-more-font-size_medium;
+  //   font-weight: $button-show-more-text-weight_medium;
+  border-radius: $button-show-more-border_radius_tiny_tiny;
+  border: $button-show-more-border;
+  transition: background 0.5s ease;
+
+  &:hover {
+    background: $button-show-more-background_white;
+    transition: background 0.5s ease;
+  }
+}
+
+%flex-space_between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+%search_header {
+  box-shadow: $card-box_shadow_two;
+  border-radius: $search_header-border-radius;
+  width: 100%;
+  border: $search_header-border;
+  padding: 20px 75px;
+  color: $search_header-color-cod_gray;
+  font-weight: $text-weight_medium;
+  font-size: $font-size_medium;
+  z-index: 4;
+  right: 0;
+
+  @include responsive($md) {
+    padding: 20px 20px 20px 75px;
+  }
+}
+
+%columm_flex {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+%reviews {
+  font-size: 29px;
+
+  &::before {
+    content: "\2605";
+    display: block;
+    color: $basic-color-selective_yellow;
+  }
+}
+
+%form-mailing__input {
+  width: 100%;
+  padding: 24px 60px;
+  color: $input-mail-text-color-silver_two;
+  background: $input-mail-background-concrete;
+  border-radius: $input-mail-border_radius_big;
+}
+
+%select-background {
+  background: #fff7e1;
+  border: 1px solid #f9b300;
+  border-radius: $input-base-border_radius_tiny;
+  padding: 6px 17px 6px 30px;
+  font-weight: $text-weight_medium;
+  font-size: $text-font_size_small;
+}
+
+%see-all__bottom-line {
+  display: block;
+  border-bottom: $link-see-all-border_bottom;
+  transition: border-bottom 0.5s ease;
+
+  .see-all:hover & {
+    border-bottom: $link-more-border_bottom;
+    transition: border-bottom 0.5s ease;
+  }
+}
+
+%card-bg {
+  border-radius: 20px;
+  border: 1px solid #E4E4E4;
+  background: #FFF;
+  box-shadow: 0px 0px 50px 0px rgba(163, 163, 163, 0.25);
+  padding: 110px 140px;
+
+  @include responsive($xl) {
+    padding: 90px 100px;
+  }
+
+  @include responsive($lg) {
+    padding: 30px 15px;
+  }
+
+  @include responsive($md) {
+    padding: 60px 30px;
+  }
+
+  @include responsive(480px) {
+    padding: 30px 15px;
+  }
+}
+
+%input-base-card {
+  border-radius: $input-card-amount-border_radius_tiny;
+  border: $input-card-amount-border;
+  background: #FCFCFC;
+  color: #C4C4C4;
+  font-size: $input-base-font-size_medium;
+  font-weight: $input-base-text-weight_medium;
+  padding: 23px 30px;
+}
+
+.see-all-card {
+  background: $color-white;
+  border: $button-show-more-border;
+  border-radius: 10px;
+  font-size: $font-size_medium;
+  color: $color-black;
+  text-align: center;
+  width: 100%;
+  padding: 23px 0;
+  margin-top: 70px;
+}
+
+@mixin button-base($border, $size) {
+  padding: 22px 56px;
+  text-align: center;
+  display: inline-block;
+  border-radius: $border;
+  font-weight: $button-base-weight_bold;
+  background: $button-base-basic-color-selective_yellow;
+  font-size: $size;
+  color: $button-base-text-color-white;
+  transition: background 0.5s ease;
+
+  &:hover {
+    background: $button-base-basic-color-hover_selective_yellow;
+    transition: background 0.5s ease;
+  }
+
+  @include responsive($breakpoint_sm) {
+    font-size: $text-font_size_big;
+  }
+}
+
+@mixin link-more_see-all($color) {
+  padding: 10px 24px;
+  display: inline-block;
+  font-size: $link-more_see-all-font-size_medium;
+  color: $color;
+  transition: background 0.5s ease, color 0.5s ease, border-radius 0.5s ease;
+
+  &:hover {
+    background: $link-more_see-all-hover-background-alabaster;
+    border-radius: $link-more_see-all-border_radius_mediuml;
+    color: $link-see-all-hover-background-selective_yellow;
+    transition: background 0.5s ease, color 0.5s ease, border-radius 0.5s ease;
+  }
+
+  @include responsive($sm) {
+    font-size: $text-font_size_small;
+    padding: 15px;
+  }
+}

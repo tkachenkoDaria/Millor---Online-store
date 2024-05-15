@@ -1,0 +1,45 @@
+@import "./abstracts/variables";
+@import "./abstracts/mixins";
+@import "./base/specification";
+@import "./base/typography";
+
+@import "./layout/header";
+@import "./layout/categories";
+@import "./layout/catalog-product-sale";
+@import "./layout/advantage";
+@import "./layout/info-coffe";
+@import "./layout/companys-news-home";
+@import "./layout/social-instagram";
+@import "./layout/coffe-filters";
+@import "./layout/ancor-lincks";
+@import "./layout/description-card";
+@import "./layout/review";
+@import "./layout/filter-news";
+@import "./layout/faq";
+@import "./layout/forms";
+@import "./layout/footer";
+
+@import "./components/buttons";
+@import "./components/offer";
+@import "./components/category";
+@import "./components/carousel";
+@import "./components/select";
+@import "./components/card-coffe";
+@import "./components/news-card";
+@import "./components/breadcrumb";
+@import "./components/checkbox";
+@import "./components/making-coffee";
+@import "./components/tea-category";
+@import "./components/card-tea";
+@import "./components/vending-card";
+@import "./components/modal";
+@import "./components/accordion";
+@import "./components/food-catalog";
+
+@import "./pages/coffe-catalog";
+@import "./pages/tea-catalog";
+@import "./pages/vending-catalog-page";
+@import "./pages/card-product-cofe-page";
+@import "./pages/home";
+@import "./pages/cart-page";
+@import "./pages/my-account";

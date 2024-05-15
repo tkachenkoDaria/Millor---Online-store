@@ -1,0 +1,6 @@
+.price-basket_vending{
+    width: 100%;
+    @include responsive($sm) {
+        font-size:$text-font_size_small;
+      }
+}

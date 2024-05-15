@@ -1,0 +1,27 @@
+/* companys-news-home */
+.companys-news {
+  padding: 95px 0 28px;
+  @include responsive($sm) {
+    padding: 40px 0;
+  }
+  @include responsive($breakpoint_sm) {
+    padding: 50px 0 5px;
+  }
+}
+.companys-news-wrapp {
+  @extend %flex-space_between;
+  @include responsive($lg) {
+    margin-bottom: 30px;
+  }
+  @include responsive($md) {
+    margin-bottom: 55px;
+  }
+  @include responsive($breakpoint_sm) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+.news-home {
+  @extend %flex-space_between;
+  flex-wrap: wrap;
+}

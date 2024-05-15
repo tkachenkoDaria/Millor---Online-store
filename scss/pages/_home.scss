@@ -1,0 +1,65 @@
+.swiper-wrapper {
+    padding: 80px 0 20px;
+
+    .swiper-slide {
+        height: auto;
+    }
+
+    .card-coffe_catalog {
+        height: 100%;
+    }
+
+    .card-coffe__icon {
+        right: 0;
+    }
+
+    .variations {
+        width: 100%;
+    }
+
+    .woocommerce-variation.single_variation {
+        padding: 20px 0;
+    }
+
+    .star-rating {
+        display: none;
+    }
+}
+
+.products-sale-wrapp {
+    .swiper-wrapper .card-coffe_catalog {
+        @include responsive($md) {
+            height: auto;
+        }
+    }
+
+    .price-basket,
+    .button,
+    .woocommerce a.button {
+        @include responsive($md) {
+            height: auto !important;
+            width: 100% !important;
+        }
+    }
+
+    .card-coffe {
+        @include responsive($md) {
+            width: 100%;
+        }
+
+        a {
+            @include responsive($md) {
+                width: fit-content;
+            }
+        }
+    }
+
+    a.added_to_cart.wc-forward {
+        color: $basic-color-selective_yellow;
+        transition: color 0.5s ease;
+
+        &:hover {
+            color: $basic-color-hover_selective_yellow;
+        }
+    }
+}

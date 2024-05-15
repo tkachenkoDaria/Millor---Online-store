@@ -1,0 +1,29 @@
+.card-tea{
+    &__wrapp-top{
+        display: flex;
+    }
+    &__img{
+        width: 225px;
+        height: 315px;
+        display: block;
+        margin: 0 auto 22px;
+        object-fit: contain;
+    }
+    &__name{
+        margin-bottom: 30px;
+    }
+    &__items{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+}
+.itc-select_card-tea{
+    left: 20%;
+}
+.card-coffe__icon_tea{
+    top: 18%;
+    right: 42px;
+}

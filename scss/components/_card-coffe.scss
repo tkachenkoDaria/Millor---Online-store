@@ -1,0 +1,201 @@
+/* card-cofe*/
+.card-coffe {
+  max-width      : 340px;
+  // margin: 0 20px;
+  padding        : 21px 20px 50px 20px;
+  background     : $color-white;
+  box-shadow     : $card-box_shadow_two;
+  border-radius  : $border_radius_card;
+  width          : 92%;
+  position       : relative;
+  display        : flex;
+  flex-direction : column;
+  justify-content: space-between;
+  align-items    : stretch;
+
+  @include responsive($xl) {
+    max-width: 400px;
+    width    : 100%;
+  }
+
+  @include responsive($lg) {
+    width : 85%;
+    margin: 0 auto;
+  }
+  .qib-container{
+    display: none !important;
+  }
+  form.cart .qib-container + button[type='submit']:not(#qib_id):not(#qib_id){
+    margin: 0;
+  }
+  .price{
+    margin-bottom: 20px;
+  }
+}
+
+.card-coffe__icon {
+  background: url("../img/products-sale/sale-icon.svg") no-repeat;
+  width     : 70px;
+  height    : 70px;
+  display   : block;
+  position  : absolute;
+  top       : -4%;
+}
+
+.card-coffe__text {
+  font-weight: 700;
+  font-size  : 18px;
+  color      : $basic-color-selective_yellow;
+  text-align : $text-align_left;
+  display    : block;
+  margin     : 0 0 10px;
+}
+
+.card-coffe__text-wrapp {
+  margin-bottom: 20px;
+}
+
+.card-coffe__inner {
+  display        : flex;
+  justify-content: space-around;
+  gap            : 20px;
+  margin-bottom  : 39px;
+
+  img {
+    max-width: 170px;
+  }
+
+  @include responsive($breakpoint_sm) {
+    flex-direction: column;
+  }
+}
+
+.card-reviews {
+  display: flex;
+
+  @include responsive($breakpoint_sm) {
+    justify-content: center;
+  }
+}
+
+.card-reviews_coffe {
+  margin-bottom: -8px;
+}
+
+.card-reviews__star {
+  @extend %reviews;
+
+}
+
+.response {
+  display    : flex;
+  align-items: baseline;
+
+  @include responsive($breakpoint_sm) {
+    justify-content: center;
+  }
+
+  p {
+    font-weight  : $text-weight_bold;
+    font-size    : $font-size_medium;
+    color        : $text-color-mine_shaft;
+    margin-bottom: 15px;
+  }
+
+  span {
+    font-size  : $text-font-size_tiny;
+    color      : $text-color-scorpion;
+    margin-left: 5px;
+  }
+}
+
+.strength-coffe {
+  @extend %flex-space_between;
+  margin-bottom: 15px;
+
+  span {
+    background: url("../img/products-sale/strength-coffe.svg") no-repeat;
+    width     : 20px;
+    height    : 19px;
+    display   : block;
+  }
+}
+
+.quality-coffe {
+  p {
+    font-size    : $text-font-size_tiny;
+    color        : $text-color-mine_shaft;
+    text-align   : $text-align_left;
+    margin-bottom: 10px;
+  }
+}
+
+.quality-properties {
+  @extend %flex-space_between;
+}
+
+.quality-properties__item {
+  width        : 10px;
+  height       : 10px;
+  border-radius: $border_radius_circle_card-cofe;
+  background   : $basic-color-selective_yellow;
+  margin-bottom: 15px;
+}
+
+.quality-properties__item_not-active {
+  background: $text-color-gallery;
+}
+
+.goods-name-coffe {
+  font-weight  : $card-coffe-text-weight_bold;
+  font-size    : $text-font_size_big;
+  color        : $text-color-mine_shaft;
+  margin-bottom: 10px;
+  text-align   : $text-align_left;
+}
+
+.goods-desc-coffe {
+  font-size : $text-font_size_small;
+  color     : $text-color-mine_shaft;
+  max-width : 269px;
+  text-align: $text-align_left;
+  flex-grow: 1;
+
+  @include responsive($breakpoint_sm) {
+    max-width: 100%;
+  }
+}
+
+.price-btn {
+  @extend %flex-space_between;
+  margin-top: 30px;
+
+  span {
+    font-weight: $card-coffe-text-weight_bold;
+    font-size  : $text-card-coffe-font_size;
+    color      : $text-color-mine_shaft;
+
+    @include responsive($breakpoint_sm) {
+      text-align: right;
+    }
+  }
+
+  @include responsive($breakpoint_sm) {
+    flex-direction: column;
+    align-items   : normal;
+  }
+}
+
+.price-sale {
+  text-align          : $text-align_left;
+  display             : block;
+  font-size           : $text-font_size_big;
+  text-decoration-line: line-through;
+  color               : $text-color-silver_one;
+  position            : absolute;
+  bottom              : 86px;
+
+  @include responsive($breakpoint_sm) {
+    bottom: 135px;
+  }
+}

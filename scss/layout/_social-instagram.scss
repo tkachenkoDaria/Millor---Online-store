@@ -1,0 +1,72 @@
+/* social-instagram */
+.social-instagram {
+  padding: 48px 0 44px;
+
+  @include responsive($sm) {
+    padding: 20px 0;
+  }
+
+  @include responsive($breakpoint_sm) {
+    padding: 10px 0 15px;
+  }
+
+  &-wrapper {
+    display: flex;
+
+    @include responsive($xl) {
+      flex-direction: column;
+    }
+  }
+}
+
+.instagram-title {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-left: 54px;
+  }
+
+  @include responsive($xl) {
+    margin-bottom: 40px;
+  }
+}
+
+.apple-wrapp {
+  position: relative;
+  display: flex;
+
+  @include responsive($xl) {
+    justify-content: center;
+  }
+
+  @include responsive($md) {
+    justify-content: flex-start;
+  }
+
+  @include responsive($sm) {
+    justify-content: center;
+
+    img {
+      width: 80%;
+    }
+  }
+}
+
+.apple-two {
+  position: absolute;
+  top: 4rem;
+  left: 5rem;
+
+  @include responsive($xl) {
+    left: 11rem;
+  }
+
+  @include responsive($lg) {
+    left: 9rem;
+  }
+
+  @include responsive($md) {
+    display: none;
+  }
+}

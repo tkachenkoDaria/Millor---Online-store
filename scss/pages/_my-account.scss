@@ -1,0 +1,54 @@
+.post-171 {
+    h1 {
+        padding: 20px 0 50px;
+    }
+}
+
+.woocommerce-MyAccount-navigation {
+
+    li {
+        &.is-active {
+            a {
+                font-weight: $weight-semi_bold;
+                color: $basic-color-selective_yellow;
+            }
+        }
+
+        margin: 20px 0;
+
+        &:first-of-type {
+            margin-top: 0;
+        }
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
+        a {
+            color: $text-color-mine_shaft;
+            font-weight: $text-weight_medium;
+            transition: color 0.7s ease;
+
+            &:hover {
+                color: $basic-color-hover_selective_yellow;
+                transition: color 0.7s ease;
+            }
+        }
+    }
+}
+
+.woocommerce-orders-table {
+    .woocommerce-orders-table__cell-order-number {
+        a {
+            color: $basic-color-hover_selective_yellow;
+
+            font-weight: $text-weight_medium;
+            transition: color 0.7s ease;
+
+            &:hover {
+                color: $text-color-mine_shaft;
+                transition: color 0.7s ease;
+            }
+        }
+    }
+}

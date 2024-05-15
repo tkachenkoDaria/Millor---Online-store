@@ -1,0 +1,93 @@
+/* catalog-product-sale */
+.swiper_product-sale {
+  padding: 10px 0 40px;
+  width: calc(100% - 70px);
+
+  @include responsive($xl) {
+    width: calc(100% - 140px);
+  }
+
+  @include responsive(730px) {
+    width: 100%;
+  }
+
+  .swiper-pagination.swiper-pagination_product-cofe.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+    bottom: -7px;
+  }
+
+
+}
+
+// products-cofe
+.catalog-product-sale {
+  padding: 45px 0 59px;
+  text-align: $text-align_right;
+
+  @include responsive($md) {
+    padding: 25px 0 40px;
+  }
+
+  @include responsive($breakpoint-small) {
+    padding: 25px 0 20px;
+  }
+
+  .swiper-button-wrap {
+
+    .swiper-button-next_card-next,
+    .swiper-button-prev_card-prev {
+      transform: translateY(-50%);
+    }
+
+    .swiper-button-next_card-next {
+      right: 0;
+    }
+
+    .swiper-button-prev_card-prev {
+      left: 0;
+    }
+  }
+}
+
+//   product-sale
+.product-home-sale {
+  @extend %columm_flex;
+
+  p {
+    max-width: 950px;
+    margin: 50px 0 0;
+
+    @include responsive($sm) {
+      margin: 30px 0 0;
+    }
+  }
+}
+
+//products-wrapp
+.products-sale-wrapp {
+  display: flex;
+  justify-content: center;
+
+  @include responsive($xl) {
+    justify-content: normal;
+  }
+
+  .swiper-button-wrap {
+    @include responsive(730px) {
+      display: none;
+    }
+  }
+
+  .card-coffe_catalog {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+//   card-coffe-wrapp
+.card-coffe-wrapp {
+  padding: 45px 0;
+
+  @include responsive($breakpoint-small) {
+    padding: 60px 0 30px;
+  }
+}

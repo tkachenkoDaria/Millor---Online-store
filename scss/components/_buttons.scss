@@ -1,0 +1,223 @@
+/* buttons*/
+// header
+.cart {
+  display: block;
+  margin: 0 25px;
+  background: none;
+
+  svg {
+    width: 37px;
+    height: 35px;
+    stroke: $color-black;
+    transition: stroke 0.5s ease;
+
+    &:hover {
+      stroke: $basic-color-selective_yellow;
+      transition: stroke 0.5s ease;
+    }
+  }
+
+  @include responsive($xl) {
+    margin: 0 20px;
+  }
+
+  @include responsive($sm) {
+    margin: 0 5px;
+  }
+}
+
+.login {
+  display: block;
+  background: none;
+
+  svg {
+    width: 33px;
+    height: 36px;
+    stroke: $color-black;
+    transition: stroke 0.5s ease;
+
+    &:hover {
+      stroke: $basic-color-selective_yellow;
+      transition: stroke 0.5s ease;
+    }
+  }
+}
+
+.close {
+  background: $color-black;
+  height: 35px;
+  width: 3px;
+  position: relative;
+  left: -40px;
+  z-index: 4;
+  transform: rotate(44deg);
+  display: none;
+
+  &.active {
+    display: block;
+    cursor: pointer;
+    background: $basic-color-selective_yellow;
+    transition: background 0.5s ease;
+
+    &::after {
+      content: "";
+      height: 3px;
+      width: 35px;
+      background: $basic-color-selective_yellow;
+      position: absolute;
+      left: -16px;
+      top: 16px;
+      transition: background 0.5s ease;
+    }
+  }
+}
+
+.search-icon {
+  display: block;
+  background: none;
+  position: relative;
+  z-index: 4;
+
+  svg {
+    stroke: #000;
+    width: 36px;
+    height: 35px;
+
+    &:hover {
+      stroke: $basic-color-selective_yellow;
+      transition: stroke 0.5s ease;
+    }
+  }
+
+  &.active {
+    left: -785px;
+
+    svg {
+      stroke: $basic-color-selective_yellow;
+    }
+  }
+}
+
+// offer
+.btn {
+  @include button-base(5px, $button-base-text-font_size_large);
+
+  @include responsive($md) {
+    width: 100%;
+  }
+
+  @include responsive($breakpoint_sm) {
+    padding: 20px;
+  }
+}
+
+// card-cofee
+.price-basket,
+.button,
+.woocommerce a.button {
+  @include button-base(5px, $text-font_size_small);
+  padding: 13px 46px;
+  width: 100%;
+  position: relative;
+  z-index: 9999;
+
+  // font-size: $font-size_tiny;
+  @include responsive($xxl) {
+    padding: 13px 25px;
+  }
+
+  // @include responsive($xl) {
+  //   width: 60%;
+  // }
+
+  @include responsive($lg) {
+    margin-top: 10px;
+  }
+
+  @include responsive($breakpoint_sm) {
+    width: 100%;
+  }
+
+  @include responsive(480px) {
+    font-size: 18px;
+    line-height: 30px !important;
+  }
+}
+
+// info-coffe
+.roasting-coffee__btn {
+  @include button-base(5px, $text-font_size_large);
+
+  @include responsive($md) {
+    width: 100%;
+    padding: 22px;
+    font-size: 20px;
+  }
+}
+
+// footer-btn
+.form-mailing__btn {
+  @include button-base($button-base-border_radius_big, $text-font_size_big);
+  margin-left: -60px;
+
+  @include responsive($md) {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 20px;
+    padding: 22px 15px;
+  }
+
+  @include responsive($sm) {
+    padding: 15px;
+  }
+
+  @include responsive($breakpoint_sm) {
+    font-size: 25px;
+  }
+}
+
+// companys-news-home
+.see-all_news {
+  @include link-more_see-all($link-see-all-text_color_black);
+
+  @include responsive($breakpoint_sm) {
+    margin-left: 0;
+    margin-top: 15px;
+  }
+}
+.see-more-product{
+  @include link-more_see-all($link-see-all-text_color_black);
+  @extend %button-show_more;
+  width: 100%;
+  margin-top: 50px;
+}
+// news-card
+.more {
+  // @extend %more;
+  display: inline-block;
+  padding: 10px 24px;
+  max-width: 190px;
+  @include link-more_see-all($link-more-color-selective_yellow);
+
+  &::after {
+    content: "";
+    background: url("../img/ua/arrow.svg") no-repeat;
+    display: inline-block;
+    width: 13px;
+    height: 11px;
+    margin-left: 10px;
+  }
+}
+
+// card-product-sale
+.see-all {
+  @include link-more_see-all($link-see-all-text_color_black);
+}
+
+.see-all__bottom-line {
+  @extend %see-all__bottom-line;
+}
+
+a.added_to_cart.wc-forward {
+  @include link-more_see-all($link-see-all-text_color_black);
+}

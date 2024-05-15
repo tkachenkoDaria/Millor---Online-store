@@ -1,0 +1,187 @@
+/* carousel*/
+.swiper_head {
+  width: 100%;
+  height: 100%;
+  margin-left: -285px;
+  margin-right: -236px;
+
+  @include responsive($xl) {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+}
+
+.swiper_head,
+.swiper-button-wrap {
+  @include responsive($sm) {
+    display: none;
+  }
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+
+.swiper-slide {
+  display: block;
+  max-width: 100%;
+  object-fit: fill;
+
+  @include responsive($xxl) {
+    min-height: 290px;
+  }
+
+  @include responsive($breakpoint_sm) {
+    min-height: auto;
+    margin: 0 auto;
+  }
+}
+
+.swiper-slide__wrapp {
+  display: flex;
+  margin-top: 30px;
+  margin-left: -48px;
+  height: 665px;
+
+  @include responsive($lg) {
+    height: 560px;
+  }
+
+  @include responsive($md) {
+    height: 420px;
+  }
+}
+
+
+.swiper-slide__background {
+  position: absolute;
+  z-index: -1;
+}
+
+.swiper-slide__photo {
+  position: relative;
+  left: 75px;
+  bottom: -43px;
+  height: auto;
+  width: 60%;
+  object-fit: contain;
+
+  img {
+    max-width: 744px;
+    height: 496px;
+
+    @include responsive($md) {
+      max-width: 500px;
+      height: 380px;
+    }
+  }
+}
+
+.swiper-pagination-bullet-active {
+  background: $basic-color-selective_yellow;
+  width: 20px;
+  height: 20px;
+}
+
+.swiper-pagination-bullet {
+  width: 20px;
+  height: 20px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  background: $basic-color-selective_yellow;
+
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  font-size: 0;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  width: 26px;
+  height: 18px;
+  background: url("../img/products-sale/arrow.svg") no-repeat;
+  display: block;
+  font-size: 0;
+}
+
+.swiper-button-next:after {
+  transform: rotate(-180deg);
+}
+
+.mySwiperTwo {
+  position: static;
+}
+
+//
+.swiper-pagination.swiper-pagination_instagram.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+  @include responsive($xl) {
+    bottom: 0;
+    left: 0;
+    top: auto;
+    right: 0;
+  }
+}
+
+.swiper_social-instagram {
+  max-width: 700px;
+  max-height: 755px;
+
+  @include responsive($xxl) {
+    max-width: 600px;
+  }
+
+  @include responsive($xl) {
+    max-width: 100%;
+    margin-top: 85px;
+  }
+
+  @include responsive($sm) {
+    display: none;
+  }
+}
+
+.slider-img {
+  max-width: 300px;
+  height: 300px;
+  background: #e9e9e9;
+  border-radius: 10px;
+
+  @include responsive($xl) {
+    max-width: 600px;
+    height: 450px;
+  }
+}
+
+.swiper_social-instagram {
+  margin: 0 0 0 auto;
+}
+
+.s-b--n_insta {
+  right: 11px;
+
+  @include responsive($xl) {
+    display: none;
+  }
+}
+
+.swiper-slide_insta {
+  margin-top: 0 !important;
+  padding-bottom: 20px;
+
+  @include responsive($xl) {
+    padding-bottom: 65px;
+  }
+}
+
+.swiper-pagination_instagram {
+  display: none;
+
+  @include responsive($xl) {
+    display: block;
+  }
+}

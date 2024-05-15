@@ -1,0 +1,178 @@
+.decription-wrapp {
+  display: flex;
+  justify-content: space-between;
+  padding: 100px 0 90px;
+  gap: 20px;
+  @include responsive($xxl) {
+    gap: 40px;
+  }
+  @include responsive($xl) {
+    gap: 20px;
+  }
+  @include responsive($lg) {
+    flex-direction: column;
+    gap: 45px;
+  }
+  @include responsive($lg) {
+    margin: auto;
+    max-width: 90%;
+  }
+}
+.decriprion-flex-wrapper {
+  @include responsive($lg) {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+.description-card {
+  background: $category-card-color-white;
+  box-shadow: $card-box_shadow_coffe-filter;
+  border-radius: $border_radius_card;
+  padding: 55px 40px;
+  @include responsive($xl) {
+    padding: 55px 25px;
+  }
+}
+.description-card_width {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  @include responsive($lg) {
+    max-width: 100%;
+  }
+  @include responsive($sm) {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .decriprion-flex-wrapper {
+    @include responsive($md) {
+      flex-wrap: wrap;
+    }
+    @include responsive($sm) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+.decriprion-card__title {
+  font-weight: $h4-h5-weight_bold;
+  font-size: $h5-font_size_hover;
+  color: $h3-color-mine_shaft;
+  margin-bottom: 50px;
+  @include responsive($md) {
+    text-align: center;
+  }
+}
+.decriprion-card__title_margin {
+  margin-bottom: 24px;
+}
+.decriprion-flex {
+  display: flex;
+  align-items: center;
+  margin-bottom: 45px;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  @include responsive($sm) {
+    margin-right: auto;
+  }
+}
+.decriprion-flex_border {
+  border-bottom: 1px solid #b2b2b2;
+  padding-bottom: 20px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  @include responsive($md) {
+    flex-direction: column;
+  }
+}
+.decriprion-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: $basic-color-selective_yellow;
+  padding: 14px 19px;
+}
+.decriprion-text {
+  color: $h3-color-mine_shaft;
+  margin: 0 0 0 50px;
+  @include responsive($xl) {
+    margin: 0 0 0 30px;
+  }
+  @include responsive($lg) {
+    margin: 0 0 0 20px;
+  }
+}
+
+.decriprion-name {
+  font-weight: $text-weight_bold;
+  margin: 0;
+}
+.decriprion-text-desc {
+  max-width: 433px;
+  text-align: end;
+  margin: 0;
+  @include responsive($md) {
+    text-align: center;
+    margin: 5px 0;
+  }
+}
+.decriprion-bottom-wrapp {
+  margin-top: 102px;
+  margin-bottom: 67px;
+  @include responsive($lg) {
+    margin-top: 70px;
+    margin-bottom: 60px;
+  }
+  @include responsive($md) {
+    margin: 30px 0;
+  }
+}
+.decriprion-bottom-wrapp_coffe {
+  margin-top: 0px;
+}
+.border-bottom {
+  border-bottom: 1px solid #b3b3b3;
+  display: block;
+  width: 100%;
+}
+.decriprion-bottom-text {
+  color: $h3-color-mine_shaft;
+  max-width: 90%;
+  line-height: 130%;
+  @include responsive($md) {
+    max-width: 100%;
+  }
+}
+
+.carryover {
+  display: block;
+}
+
+.wrap-block-text-desc {
+  margin: 50px 0;
+  @include responsive($sm) {
+    margin: 25px 0;
+  }
+  h3 {
+    margin-bottom: 30px;
+  }
+  p {
+    color: $h3-color-mine_shaft;
+    max-width: 80%;
+    @include responsive($lg) {
+      max-width: 100%;
+    }
+  }
+  img {
+    border-radius: 20px;
+    display: block;
+    max-width: 100%;
+  }
+}

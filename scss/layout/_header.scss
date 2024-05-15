@@ -1,0 +1,358 @@
+/* header */
+.header {
+  padding: 22px 0;
+  background: #ffffff;
+  box-shadow: 0px 5px 20px rgba(157, 157, 157, 0.25);
+}
+
+.header-wrapp {
+  @extend %flex-space_between;
+  position: relative;
+
+  @include responsive($lg) {
+    display: none;
+  }
+}
+
+.logo {
+  display: block;
+  max-width: 260px;
+  margin-right: 20px;
+}
+
+.logo__img {
+  @include responsive($sm) {
+    object-fit: contain;
+    max-width: 200px;
+  }
+
+  @include responsive($breakpoint-small) {
+    max-width: 150px;
+  }
+}
+
+.navigation {
+  display: flex;
+  margin: 0;
+
+  li {
+    padding: 0 50px;
+
+    @include responsive($xl) {
+      padding: 0 20px;
+    }
+
+    &:last-of-type {
+      padding-right: 0;
+    }
+
+    &:first-of-type {
+      padding-left: 0;
+    }
+  }
+
+  a {
+    color: $link-menu-text_color_black;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.5s ease;
+  }
+
+  a:hover {
+    border-bottom: $link-menu-hover-border;
+    transition: border-bottom 0.5s ease;
+  }
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+
+  @include responsive($lg) {
+    position: relative;
+  }
+
+  @include responsive($md) {
+    justify-content: flex-end;
+  }
+}
+
+
+.searsh-form {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 4;
+
+  &_mobi {
+    display: none;
+
+    @include responsive($lg) {
+      display: block;
+    }
+  }
+}
+
+
+
+
+.yith-ajaxsearchform-container {
+  opacity: 0;
+  position: absolute;
+  transition: all 0.5s ease;
+  left: 290px;
+  z-index: -1;
+
+  @include responsive($xl) {
+    left: 235px;
+  }
+
+  @include responsive($lg) {
+    left: 0;
+    width: 100%;
+  }
+
+  .yith-s {
+    @extend %search_header;
+  }
+
+  &>form {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 4;
+
+    &>div {
+      transition: all 0.5s ease;
+      width: 0;
+    }
+
+    input[type="submit"] {
+      position: absolute;
+      z-index: 5;
+      left: 20px;
+      top: 16px;
+      background: url('../img/input-search-submit.svg') no-repeat;
+      width: 35px;
+      height: 35px;
+    }
+
+    .close-wrap {
+      position: absolute;
+      right: 20px;
+      z-index: 4;
+      top: 19px;
+      width: 40px;
+      cursor: pointer;
+    }
+
+    .close {
+      left: 14px;
+    }
+  }
+
+  &.active {
+    opacity: 1;
+    z-index: 25;
+
+    &>form {
+      &>div {
+        width: 852px;
+
+        @include responsive($xxl) {
+          width: 700px;
+        }
+
+        @include responsive($xl) {
+          width: 615px;
+        }
+
+        @include responsive($lg) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+
+.wc-block-mini-cart__badge {
+  color: $basic-color-selective_yellow;
+}
+
+
+// mobi
+.menu-header_mobi {
+  @include responsive($lg) {
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    position: relative;
+    z-index: -1;
+
+    .searsh-form_mobi {
+      opacity: 0;
+      transform: translate(0px, 20rem);
+    }
+
+    .navigation_mobi {
+      transform: translate(0px, 30rem);
+      opacity: 0;
+      color: #2c3317;
+    }
+  }
+
+  @include responsive($md) {
+    .navigation_mobi {
+      display: block;
+    }
+  }
+}
+
+.menu-header_mobi.nav-active {
+  @include responsive($lg) {
+    position: relative;
+    z-index: 13;
+  }
+}
+
+.menu-header {
+  @include responsive($lg) {
+    .navigation_mobi {
+      flex-direction: column;
+      height: 0;
+      display: block;
+    }
+  }
+}
+
+.navigation_mobi {
+  display: none;
+
+  @include responsive($lg) {
+    flex-direction: column;
+    height: 0;
+    display: block;
+  }
+}
+
+.mobi-nenu {
+  display: none;
+
+  @include responsive($lg) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+// gamburger
+
+.nav-bar {
+  display: none;
+
+  @include responsive($lg) {
+    display: block;
+  }
+}
+
+.line {
+  width: 100%;
+  height: 4px;
+  margin-bottom: 7px;
+  background-color: $gamburger-line-color-mine_shaft;
+  border-radius: 2px;
+  display: block;
+}
+
+.navbar-active {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 10;
+  background-color: $navbar-active-color-concrete;
+}
+
+.nav-active {
+  @include responsive($lg) {
+    .searsh-form_mobi {
+      opacity: 1;
+      position: relative;
+      top: 7rem;
+      transform: translate(0px, -6rem);
+      transition: transform 1s ease, opacity 1s ease;
+
+      input {
+        max-width: 100%;
+        width: 100%;
+        position: static;
+        display: block;
+      }
+    }
+
+    .navigation_mobi {
+      height: auto;
+      opacity: 1;
+      transform: translate(0px, 0px);
+      transition: transform 1s ease, opacity 1s ease;
+
+      li {
+        padding: 30px 0;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.nav-active .navigation_mobi li {
+  @include responsive($sm) {
+    font-size: 25px;
+  }
+
+  @include responsive($breakpoint_sm) {
+    font-size: 20px;
+  }
+}
+
+.nav-icon {
+  width: 36px;
+  margin-bottom: -15px;
+  margin-left: 20px;
+cursor: pointer;
+  #one,
+  #two,
+  #three {
+    transition: background-color 1s ease;
+  }
+
+  &:hover {
+
+    #one,
+    #two,
+    #three {
+      background-color: $basic-color-selective_yellow;
+      transition: background-color 1s ease;
+    }
+  }
+}
+
+.icon-active {
+  margin: 60px;
+
+  #one {
+    width: 100%;
+    transform: rotate(135deg) translate(8px, -3px);
+  }
+
+  #two {
+    opacity: 0;
+    width: 0%;
+  }
+
+  #three {
+    width: 100%;
+    transform: rotate(-135deg) translate(12px, 8px);
+  }
+}

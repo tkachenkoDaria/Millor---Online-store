@@ -1,0 +1,45 @@
+.vending-category-card {
+    background   : $color-white;
+    box-shadow   : $card-box_shadow_coffe-filter;
+    border-radius: $border_radius_card;
+    padding      : 30px 20px;
+
+    @include responsive($breakpoint_sm) {
+        padding: 20px;
+    }
+
+    &__img {
+        border-radius: $border_radius_card;
+        margin-bottom: 25px;
+    }
+
+    &__name {
+        font-weight: $text-weight_bold;
+        text-align : center;
+        margin     : 0;
+
+        @include responsive($md) {
+            font-size: $text-font_size_small;
+        }
+
+        @include responsive($breakpoint_sm) {
+            font-size: $text-font-size_tiny;
+        }
+    }
+}
+
+.card-vending-img {
+    width        : 320px;
+    height       : 250px;
+    border-radius: $border_radius_card;
+    margin       : 0 auto;
+    display      : block;
+    margin-bottom: 50px;
+
+    @include responsive($sm) {
+        width     : 100%;
+        height    : auto;
+        max-width : 320px;
+        max-height: 250px;
+    }
+}

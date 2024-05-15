@@ -1,0 +1,47 @@
+/* offer */
+.offer {
+  padding: 120px 0 25px;
+  overflow: hidden;
+  @include responsive($xl) {
+    padding: 60px 0 25px;
+  }
+  @include responsive($breakpoint-small) {
+    padding: 20px 0;
+  }
+}
+.offer-wrapp {
+  display: flex;
+  @include responsive($xl) {
+    flex-direction: column;
+  }
+}
+.offer-title {
+  h1 {
+    width: 860px;
+    margin-bottom: 60px;
+    @include responsive($lg) {
+      max-width: 100%;
+    }
+    @include responsive($sm) {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+  }
+  p {
+    max-width: 600px;
+    @include responsive($xl) {
+      max-width: 100%;
+    }
+  }
+}
+.offer-desc {
+  margin-top: 35px;
+  margin-bottom: 90px;
+
+  span {
+    font-weight: $weight-semi_bold;
+  }
+  @include responsive($sm) {
+    margin-bottom: 45px;
+  }
+}

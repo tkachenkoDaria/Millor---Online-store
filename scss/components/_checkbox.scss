@@ -1,0 +1,128 @@
+input[type='checkbox'],
+input[type='radio'] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+input[type='checkbox']+label,
+input[type='radio']+label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+}
+
+input[type='checkbox']+label::before,
+input[type='radio']+label::before {
+    content: '';
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid transparent;
+    background-color: $color-checkbox;
+    border-radius: 50%;
+    margin-right: 7px;
+    transition: background 0.5s ease, border 0.5s ease;
+}
+
+input[type='checkbox']:not(:disabled):not(:checked)+label:hover::before,
+input[type='radio']:not(:disabled):not(:checked)+label:hover::before {
+    border: 1px solid $basic-color-selective_yellow;
+    transition: border 0.5s ease;
+}
+
+input[type='checkbox']:not(:disabled):active+label::before,
+input[type='radio']:not(:disabled):active+label::before {
+    background-color: $basic-color-selective_yellow;
+    transition: background 0.5s ease, border 0.5s ease;
+}
+
+
+input[type='checkbox']:focus+label::before,
+input[type='radio']:focus+label::before {
+    border: 1px solid $basic-color-selective_yellow;
+}
+
+input[type='checkbox']:focus:not(:checked)+label::before,
+input[type='radio']:focus:not(:checked)+label::before {
+    border: 1px solid $basic-color-selective_yellow;
+}
+
+input[type='checkbox']:checked+label::before,
+input[type='radio']:checked+label::before {
+    background-color: $basic-color-selective_yellow;
+}
+
+input[type='checkbox']:disabled+label::before,
+input[type='radio']:disabled+label::before {
+    background-color: #e9ecef;
+}
+
+.woocommerce-form-login__rememberme>span, .checkbox-rememberme>span  {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+}
+
+
+.woocommerce-form-login__rememberme>span::before, .checkbox-rememberme>span::before {
+    content: '';
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid transparent;
+    background-color: $color-checkbox;
+    border-radius: 50%;
+    margin-right: 7px;
+    transition: background 0.5s ease, border 0.5s ease;
+}
+
+
+.woocommerce-form-login__rememberme>input:not(:disabled):not(:checked)+span:hover::before,
+.checkbox-rememberme>input:not(:disabled):not(:checked)+span:hover::before
+ {
+    border: 1px solid $basic-color-selective_yellow;
+    transition: border 0.5s ease;
+}
+
+
+.woocommerce-form-login__rememberme>input:not(:disabled):active+span::before,
+.checkbox-rememberme>input:not(:disabled):active+span::before
+{
+    background-color: $basic-color-selective_yellow;
+    transition: background 0.5s ease, border 0.5s ease;
+}
+
+
+.woocommerce-form-login__rememberme>input:focus+span::before,
+.checkbox-rememberme>input:focus+span::before
+{
+    border: 1px solid $basic-color-selective_yellow;
+}
+
+
+.woocommerce-form-login__rememberme>input:focus:not(:checked)+span::before,
+.checkbox-rememberme>input:focus:not(:checked)+span::before
+{
+    border: 1px solid $basic-color-selective_yellow;
+}
+
+
+.woocommerce-form-login__rememberme>input:checked+span::before,
+.checkbox-rememberme>input:checked+span::before
+{
+    background-color: $basic-color-selective_yellow;
+}
+
+
+.woocommerce-form-login__rememberme>input:disabled+span::before,
+.checkbox-rememberme>input:disabled+span::before
+{
+    background-color: #e9ecef;
+}

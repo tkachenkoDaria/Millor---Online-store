@@ -1,0 +1,17 @@
+ input .input-text {
+     @extend %input-base-card;
+     border-radius: $input-card-amount-border_radius_tiny;
+     border: $input-card-amount-border;
+     background: #FCFCFC;
+     color: #C4C4C4;
+     font-size: $input-base-font-size_medium;
+     font-weight: $input-base-text-weight_medium;
+     padding: 23px 30px;
+ } 
+
+ button.woocommerce-button.button.woocommerce-form-login__submit.wp-element-button, button.woocommerce-Button.button.wp-element-button {
+     @include button-base(5px, 20px);
+     width: 100%;
+     padding: 15px;
+     height: auto !important;
+ }

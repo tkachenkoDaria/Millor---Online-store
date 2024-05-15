@@ -1,0 +1,110 @@
+.cooking-coffe {
+  display: flex;
+  gap: 21px;
+  margin-top: 25px;
+  @include responsive($xxl) {
+    flex-wrap: wrap;
+  }
+  @include responsive($lg) {
+    justify-content: center;
+    margin-top: 10px;
+  }
+}
+.coffe-icon {
+  background: #fff;
+  box-shadow: $card-box_shadow_coffe-filter;
+  border-radius: $border_radius_card;
+  width: 189px;
+  height: 190px;
+  transition: background 1s ease;
+  cursor: pointer;
+  @include responsive($md) {
+    width: 150px;
+  }
+  @include responsive($sm) {
+    width: 29%;
+  }
+  @include responsive($breakpoint_sm) {
+    width: 45%;
+  }
+  &:hover,
+  &.active {
+    background: $basic-color-selective_yellow;
+    transition: background 1s ease;
+  }
+  &:hover .coffe-icon__img,
+  &.active .coffe-icon__img {
+    stroke: #fff;
+    fill: #fff;
+    transition: fill 0.5s ease, stroke 0.5s ease;
+  }
+  &:hover .coffe-icon__title,
+  &.active .coffe-icon__title {
+    color: $text-color-white;
+    transition: color 0.5s ease;
+  }
+  &__title {
+    font-size: $font-size_medium;
+    padding: 28px 0 18px;
+    text-align: center;
+    margin: 0;
+    transition: color 0.5s ease;
+    @include responsive($sm) {
+      font-size: $text-font_size_small;
+    }
+    @include responsive($breakpoint_sm) {
+      font-size: 16px;
+    }
+  }
+  &__img {
+    stroke: #505050;
+    background: none;
+    padding-bottom: 40px;
+    margin: 0 auto;
+    display: block;
+    transition: fill 0.5s ease, stroke 1s ease;
+    @include responsive($sm) {
+      padding-bottom: 25px;
+    }
+  }
+}
+
+.cooking-coffe-content {
+  margin: 0 0 30px;
+  @include responsive($sm) {
+    margin: 0;
+  }
+}
+.cooking-content {
+  &__title {
+    margin: 30px 0 30px;
+    @include responsive($lg) {
+      font-size: 35px;
+    }
+    @include responsive($sm) {
+      font-size: 25px;
+      margin: 15px 0 15px;
+    }
+  }
+  &__text {
+    p{
+      color: $text-color-mine_shaft;
+      @include responsive($sm) {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.cooking-content {
+  display: none;
+  &.active {
+    display: block;
+  }
+}
+
+.cook-coffe{
+  border-top: 1px solid #B3B3B3;
+  border-bottom: 1px solid #B3B3B3;
+  padding: 50px 0;
+}

@@ -1,0 +1,73 @@
+/* footer */
+.footer {
+  padding: 44px 0 50px;
+  @include responsive($sm) {
+    padding: 44px 0 15px;
+  }
+}
+.footer-text {
+  margin: 50px 0 60px;
+}
+.form-mailing {
+  display: flex;
+  align-items: center;
+  max-width: 1100px;
+  margin-bottom: 20px;
+  @include responsive($md) {
+    flex-direction: column;
+  }
+}
+.form-mailing__input {
+  // width: 100%;
+  // padding: 24px 60px;
+  // color:$color-silver_two;
+  // background:$color-concrete;
+  // border-radius: $border_radius_big;
+  @extend %form-mailing__input;
+  @include responsive($breakpoint_sm) {
+    max-width: 100%;
+    padding: 24px;
+  }
+}
+
+.form-mailing__text {
+  font-size: 16px;
+  color: $text-color-scorpion;
+  a {
+    color: $basic-color-selective_yellow;
+  }
+}
+.footer-menu {
+  padding: 189px 0 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include responsive($lg) {
+    padding: 100px 0 50px;
+  }
+  @include responsive($sm) {
+    padding: 30px 0;
+    align-items: stretch;
+  }
+  ul {
+    li {
+      @include responsive($md) {
+        padding: 0 10px;
+      }
+      @include responsive($sm) {
+        padding: 10px 0px;
+      }
+      a {
+        @include responsive($md) {
+          font-size: $font-size_medium;
+        }
+      }
+    }
+  }
+}
+.navigation_footer {
+  justify-content: flex-end;
+  @include responsive($sm) {
+    flex-direction: column;
+  }
+}
