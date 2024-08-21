@@ -1,113 +1,111 @@
 <?php
 
-if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+function millor_add_woocommerce_support() {
+	add_theme_support('woocommerce');
+	add_theme_support('wc-product-gallery-lightbox');
+	add_theme_support('wc-product-gallery-zoom');
+}
 
-	function millor_add_woocommerce_support() {
-		add_theme_support('woocommerce');
-		add_theme_support('wc-product-gallery-lightbox');
-		add_theme_support('wc-product-gallery-zoom');
-	}
-
-	add_action('after_setup_theme', 'millor_add_woocommerce_support');
+add_action('after_setup_theme', 'millor_add_woocommerce_support');
 
 
-	// The price near the variation and rating of the product card
-	remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10);
-	remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5);
+// The price near the variation and rating of the product card
+remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10);
+remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5);
 
-	// Sorting
-	remove_action('woocommerce_before_shop_loop', 'woocommerce_output_all_notices', 10);
-	remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
-	remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
-
-
-	remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+// Sorting
+remove_action('woocommerce_before_shop_loop', 'woocommerce_output_all_notices', 10);
+remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
+remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
 
 
-	remove_action('woocommerce_after_shop_loop', 'woocommerce_pagination', 10);
+remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
 
 
-	add_filter('woocommerce_product_tabs', 'woo_remove_product_tabs', 98);
-	function woo_remove_product_tabs($tabs) {
+remove_action('woocommerce_after_shop_loop', 'woocommerce_pagination', 10);
 
-		unset($tabs['description']);
-		unset($tabs['additional_information']);
 
-		return $tabs;
-	}
+add_filter('woocommerce_product_tabs', 'woo_remove_product_tabs', 98);
+function woo_remove_product_tabs($tabs) {
 
-	// review single page product
-	add_filter('comment_form_defaults', 'render_pros_cons_fields_for_anonymous_users', 10, 1);
-	add_action('comment_form_top', 'render_pros_cons_fields_for_authorized_users');
-	function get_pros_cons_fields_html() {
-		ob_start();
+	unset($tabs['description']);
+	unset($tabs['additional_information']);
+
+	return $tabs;
+}
+
+// review single page product
+add_filter('comment_form_defaults', 'render_pros_cons_fields_for_anonymous_users', 10, 1);
+add_action('comment_form_top', 'render_pros_cons_fields_for_authorized_users');
+function get_pros_cons_fields_html() {
+	ob_start();
 ?>
 
-		<div class="pcf-container">
-			<div class="pcf-field-container">
-				<label for="pros"><?php esc_html_e('Заголовок:', 'millor'); ?></label>
-				<input id="pros" name="pros" type="text">
-			</div>
-
-			<div class="pcf-field-container">
-				<label for="cons"><?php esc_html_e('Місто:', 'millor'); ?></label>
-				<input id="cons" name="cons" type="text">
-			</div>
+	<div class="pcf-container">
+		<div class="pcf-field-container">
+			<label for="pros"><?php esc_html_e('Заголовок:', 'millor'); ?></label>
+			<input id="pros" name="pros" type="text">
 		</div>
 
+		<div class="pcf-field-container">
+			<label for="cons"><?php esc_html_e('Місто:', 'millor'); ?></label>
+			<input id="cons" name="cons" type="text">
+		</div>
+	</div>
+
 	<?php
-		return ob_get_clean();
-	}
-
-	function render_pros_cons_fields_for_authorized_users() {
-		if (!is_product() || !is_user_logged_in()) {
-			return;
-		}
-
-		echo get_pros_cons_fields_html();
-	}
-
-	function render_pros_cons_fields_for_anonymous_users($defaults) {
-		if (!is_product() || is_user_logged_in()) {
-			return;
-		}
-
-		$defaults['comment_notes_before'] .= get_pros_cons_fields_html();
-
-		return $defaults;
-	}
-
-	add_action('comment_post', 'save_review_pros_and_cons', 10, 3);
-	function save_review_pros_and_cons($comment_id, $approved, $commentdata) {
-		// The pros and cons fields are not required, so we have to check if they're not empty
-		$pros = isset($_POST['pros']) ? $_POST['pros'] : '';
-		$cons = isset($_POST['cons']) ? $_POST['cons'] : '';
-
-		// Spammers and hackers love to use comments to do XSS attacks.
-		// Don't forget to escape the variables
-		update_comment_meta($comment_id, 'pros', esc_html($pros));
-		update_comment_meta($comment_id, 'cons', esc_html($cons));
-	}
-
-
-	add_filter('comment_text', 'add_pros_and_cons_to_review_text', 10, 1);
-	function add_pros_and_cons_to_review_text($text) {
-		// We don't want to modify a comment's text in the admin, and we don't need to modify the text of blog post commets
-		if (is_admin() || !is_product()) {
-			return $text;
-		}
-
-		$pros = get_comment_meta(get_comment_ID(), 'pros', true);
-		$cons = get_comment_meta(get_comment_ID(), 'cons', true);
-
-		$pros_html = '<h5>' . esc_html($pros) . '</h5>';
-		$cons_html = '<p class="city-comment">' . esc_html($cons) . '</p>';
-
-		$updated_text = $pros_html . $cons_html . $text;
-
-		return $updated_text;
-	}
+	return ob_get_clean();
 }
+
+function render_pros_cons_fields_for_authorized_users() {
+	if (!is_product() || !is_user_logged_in()) {
+		return;
+	}
+
+	echo get_pros_cons_fields_html();
+}
+
+function render_pros_cons_fields_for_anonymous_users($defaults) {
+	if (!is_product() || is_user_logged_in()) {
+		return;
+	}
+
+	$defaults['comment_notes_before'] .= get_pros_cons_fields_html();
+
+	return $defaults;
+}
+
+add_action('comment_post', 'save_review_pros_and_cons', 10, 3);
+function save_review_pros_and_cons($comment_id, $approved, $commentdata) {
+	// The pros and cons fields are not required, so we have to check if they're not empty
+	$pros = isset($_POST['pros']) ? $_POST['pros'] : '';
+	$cons = isset($_POST['cons']) ? $_POST['cons'] : '';
+
+	// Spammers and hackers love to use comments to do XSS attacks.
+	// Don't forget to escape the variables
+	update_comment_meta($comment_id, 'pros', esc_html($pros));
+	update_comment_meta($comment_id, 'cons', esc_html($cons));
+}
+
+
+add_filter('comment_text', 'add_pros_and_cons_to_review_text', 10, 1);
+function add_pros_and_cons_to_review_text($text) {
+	// We don't want to modify a comment's text in the admin, and we don't need to modify the text of blog post commets
+	if (is_admin() || !is_product()) {
+		return $text;
+	}
+
+	$pros = get_comment_meta(get_comment_ID(), 'pros', true);
+	$cons = get_comment_meta(get_comment_ID(), 'cons', true);
+
+	$pros_html = '<h5>' . esc_html($pros) . '</h5>';
+	$cons_html = '<p class="city-comment">' . esc_html($cons) . '</p>';
+
+	$updated_text = $pros_html . $cons_html . $text;
+
+	return $updated_text;
+}
+
 
 
 
@@ -159,105 +157,150 @@ function wc_refresh_mini_cart_count($fragments) {
 	return $fragments;
 }
 
+/**
+ * Show child category
+ */
 
-function display_archive_product() {
-	global $product;
-	global $post;
-	$categories = get_the_terms($post->ID, "product_cat");
-	$product_vending = array(25, 110, 113, 111, 114, 112, 115, 116);
-	$product_coffee_drinks = array(104, 24, 109, 107, 105, 108, 106, 103);
-	$product_healthy = array(119, 120, 121, 117, 118);
-	foreach ($categories as $category) {
-		$cat_ids = $category->term_id;
+function show_child_category($class_block, $id_parent, $slug_parent, $class_category, $additional_class_catagory, $other_style = false) { ?>
+	<section class="tea-category">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="<?php echo $class_block; ?>">
+						<?php
+						$prod_cat_args = array(
+							'taxonomy'   => 'product_cat',
+							'orderby'    => 'id',
+							'hide_empty' => false,
+							'parent'     => $id_parent,
+						);
 
-		if ($cat_ids == 23) {
-			wc_get_template_part('content', 'archive-coffe');
-		}
+						$woo_categories = get_categories($prod_cat_args);
+						foreach ($woo_categories as $woo_cat) {
+							$woo_cat_id            = $woo_cat->term_id;
+							$woo_cat_name          = $woo_cat->name;
+							$woo_cat_slug          = $woo_cat->slug;
+							$class_active          = '';
+							$category_thumbnail_id = get_woocommerce_term_meta($woo_cat_id, 'thumbnail_id', true);
+							$thumbnail_image_url   = wp_get_attachment_url($category_thumbnail_id);
+							if (is_product_category($slug_parent)) {
+								$class_active = '';
+							} elseif (is_product_category($woo_cat)) {
+								$class_active = 'active-cat';
+							}
 
-		if (in_array($cat_ids, $product_vending)) {
-			wc_get_template_part('content', 'archive-vending');
-		}
+							if ($other_style == false): ?>
+								<a class="<?php echo $class_category; ?> <?php echo $additional_class_catagory; ?> <?php echo $class_active; ?>" href="<?php echo get_term_link($woo_cat_id, 'product_cat'); ?>">
+									<img class="<?php echo $class_category; ?>__img" src="<?php echo $thumbnail_image_url; ?>" alt="category img">
+									<p class="<?php echo $class_category; ?>__name">
+										<?php echo $woo_cat_name; ?>
+									</p>
+								</a>
+							<?php else: ?>
+								<a href="<?php echo get_term_link($woo_cat_id, 'product_cat'); ?>" class="<?php echo $class_category; ?>">
+									<div class="<?php echo $additional_class_catagory; ?>">
+										<img src="<?php echo $thumbnail_image_url; ?>" alt="category-photo">
+										<h5>
+											<?php echo $woo_cat_name; ?>
+										</h5>
+									</div>
+								</a>
+						<?php endif;
+						}
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<?php }
 
-		if (in_array($cat_ids, $product_coffee_drinks)) {
-			wc_get_template_part('content', 'archive-tea-healthy');
-		}
-		if (in_array($cat_ids, $product_healthy)) {
-			wc_get_template_part('content', 'archive-tea-healthy');
-		}
-	}
-}
+
+
 
 
 /**
  * Load More Products with AJAX
+ * 
  */
 
-add_action('wp_ajax_more_product', 'more_product_ajax_handler');
-add_action('wp_ajax_nopriv_more_product', 'more_product_ajax_handler');
+add_action('wp_ajax_load_more_product', 'load_more_product');
+add_action('wp_ajax_nopriv_load_more_product', 'load_more_product');
 
-function more_product_ajax_handler() {
-	$data = json_decode(file_get_contents("php://input"), true); // Отримуємо дані з POST-запиту у вигляді асоціативного масиву
+function load_more_product() {
 
-	$paged = (int) $data['page'];
+	$paged = $_POST['page'];
+	$cat_id = $_POST['cat_id'];
+	$paged++;
 
-	$args = array(
-		'paged'          => $paged,
-		'post_type'      => 'product',
-		'post_status'    => 'publish',
-		'posts_per_page' => 9
-	);
-	$loop = new WP_Query($args);
+	$args = [
+		'post_type' => 'product',
+		'posts_per_page' => 12,
+		'post_status' => 'publish',
+		'paged'     => $paged,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'product_cat',
+				'field'    => 'id',
+				'terms'    => $cat_id,
+			),
+		)
+	];
 
-	if ($loop->have_posts()) {
-		while ($loop->have_posts()) {
-			$loop->the_post();
-			display_archive_product();
-		}
-	}
+	$query = new WP_Query($args);
+	$html  = '';
 
+
+	if ($query->have_posts()):
+		ob_start();
+		while ($query->have_posts()): $query->the_post();
+			get_template_part('template-file/archive-product');
+		endwhile;
+		$html = ob_get_clean();
+
+	endif;
 	wp_reset_postdata();
+
+	$data = array('success' => true, 'html' => $html);
+	echo json_encode($data);
+
 	wp_die();
 }
 
 
 
 /**
- * Load More Products with AJAX for product category
+ *  Ajax load reviews for product
  */
+add_action('wp_ajax_load_more_reviews', 'load_more_reviews');
+add_action('wp_ajax_nopriv_load_more_reviews', 'load_more_reviews');
 
-add_action('wp_ajax_more_product_category', 'more_product_category_ajax_handler');
-add_action('wp_ajax_nopriv_more_product_category', 'more_product_category_ajax_handler');
+function load_more_reviews() {
+	$paged = $_POST['page'];
+	$product_id = $_POST['product_id'];
+	$paged++;
 
-function more_product_category_ajax_handler() {
-	$data = json_decode(file_get_contents("php://input"), true); // Отримуємо дані з POST-запиту у вигляді асоціативного масиву
+	$html  = '';
 
-	$paged = (int) $data['page'];
-	$cat_id = (int) $data['cat_id'];
+	$comments = get_comments([
+		'post_id' => $product_id,
+		'status' => 'approve'
+	]);
 
-	$args = array(
-		'paged'          => $paged,
-		'post_type'      => 'product',
-		'post_status'    => 'publish',
-		'posts_per_page' => 9,
-		'tax_query' => array(
-			array(
-				'taxonomy' => 'product_cat',
-				'field' => 'id',
-				'terms' => $cat_id,
-			)
-		)
-	);
-	$loop = new WP_Query($args);
+	wp_list_comments([
+		'page'              => $paged,
+		'per_page' => 2,
+		'order' => 'DESC',
+		'callback' => 'woocommerce_comments',
+	], $comments);
+	$html = ob_get_clean();
 
-	if ($loop->have_posts()) {
-		while ($loop->have_posts()) {
-			$loop->the_post();
-			display_archive_product();
-		}
-	}
-	wp_reset_postdata();
+	$data = array('success' => true, 'html' => $html);
+	echo json_encode($data);
+	
 	wp_die();
 }
+
 
 
 // We change the number of comments on the product page to 2

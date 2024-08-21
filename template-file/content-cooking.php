@@ -103,7 +103,7 @@
 						</div>
 					</div>
 					<div class="cooking-coffe-content" id="cooking-coffe-content">
-						<div class="cooking-content cooking-content__1 active">
+						<div class="cooking-content cooking-content_1 active">
 							<h3 class="cooking-content__title">
 								<?php the_field('cooking_title_turk', 'cooking'); ?>
 							</h3>
@@ -111,7 +111,7 @@
 								<?php the_field('cooking_desc_turk', 'cooking'); ?>
 							</div>
 						</div>
-						<div class="cooking-content cooking-content__2">
+						<div class="cooking-content cooking-content_2">
 							<h3 class="cooking-content__title">
 								<?php the_field('cooking_title_french-press', 'cooking'); ?>
 							</h3>
@@ -119,7 +119,7 @@
 								<?php the_field('cooking_desc_french-press', 'cooking'); ?>
 							</div>
 						</div>
-						<div class="cooking-content cooking-content__3">
+						<div class="cooking-content cooking-content_3">
 							<h3 class="cooking-content__title">
 								<?php the_field('cooking_title_moka', 'cooking'); ?>
 							</h3>
@@ -127,7 +127,7 @@
 								<?php the_field('cooking_desc_moka', 'cooking'); ?>
 							</div>
 						</div>
-						<div class="cooking-content cooking-content__4">
+						<div class="cooking-content cooking-content_4">
 							<h3 class="cooking-content__title">
 								<?php the_field('cooking_title_espresso', 'cooking'); ?>
 							</h3>
@@ -135,7 +135,7 @@
 								<?php the_field('cooking_desc_espresso', 'cooking'); ?>
 							</div>
 						</div>
-						<div class="cooking-content cooking-content__5">
+						<div class="cooking-content cooking-content_5">
 							<h3 class="cooking-content__title">
 								<?php the_field('cooking_title_funnel', 'cooking'); ?>
 							</h3>
@@ -143,7 +143,7 @@
 								<?php the_field('cooking_desc_funnel', 'cooking'); ?>
 							</div>
 						</div>
-						<div class="cooking-content cooking-content__6">
+						<div class="cooking-content cooking-content_6">
 							<h3 class="cooking-content__title">
 								<?php the_field('cooking_title_aeropress', 'cooking'); ?>
 							</h3>
@@ -151,7 +151,7 @@
 								<?php the_field('cooking_desc_aeropress', 'cooking'); ?>
 							</div>
 						</div>
-						<div class="cooking-content cooking-content__7">
+						<div class="cooking-content cooking-content_7">
 							<h3 class="cooking-content__title">
 								<?php the_field('cooking_title_cup', 'cooking'); ?>
 							</h3>
@@ -159,7 +159,7 @@
 								<?php the_field('cooking_desc_cup', 'cooking'); ?>
 							</div>
 						</div>
-						<div class="cooking-content cooking-content__8">
+						<div class="cooking-content cooking-content_8">
 							<h3 class="cooking-content__title">
 								<?php the_field('cooking_title_machine', 'cooking'); ?>
 							</h3>

@@ -69,36 +69,27 @@ var swiper = new Swiper(".swiper_social-instagram", {
 
 
 // search modal
-
-let searchIcons = document.querySelector('.search-icon');
+let searchIcon = document.querySelector('.search-icon');
 let searchBlok = document.querySelector('.yith-ajaxsearchform-container');
-let searchForm = document.getElementById('yith-ajaxsearchform');
-let searchMobi = document.querySelector('.searsh-form_mobi');
-let searchMobiForm = searchMobi.children[0];
-let nextSearchForm = searchForm.children[0];
-
-searchMobiForm.classList.add('active');
-
-
 let svgCloseWrap = document.createElement('div');
-svgCloseWrap.classList.add('close-wrap');
-nextSearchForm.append(svgCloseWrap);
-
 let svgClose = document.createElement('span');
-svgClose.classList.add('close');
-svgCloseWrap.append(svgClose);
 
-searchIcons.addEventListener('click', () => {
+
+svgCloseWrap.classList.add('close-wrap');
+svgClose.classList.add('close');
+
+
+svgCloseWrap.append(svgClose);
+searchBlok.append(svgCloseWrap);
+
+searchIcon.addEventListener('click', function () {
   searchBlok.classList.add('active');
   svgClose.classList.add('active');
 })
-svgCloseWrap.addEventListener('click', () => {
+svgClose.addEventListener('click', function () {
   searchBlok.classList.remove('active');
   svgClose.classList.remove('active');
 })
-
-
-
 
 // gamburger
 const icon = document.querySelector('.nav-icon');
@@ -158,24 +149,25 @@ sortItemsCoffes.forEach(el => el.addEventListener('click', () => {
 }));
 
 
+const tabContent = function (btnContainer, buttons, contentBlocks, showBtnName) {
+  const btnContainerElement = document.querySelector(`${btnContainer}`);
+  const buttonsElement = document.querySelectorAll(`${buttons}`);
+  const contentBlocksElement = document.querySelectorAll(`${contentBlocks}`);
 
-const btnIconContainer = document.querySelector('.cooking-coffe');
-const btnsIconContent = document.querySelectorAll('.coffe-icon');
-const cookingContents = document.querySelectorAll('.cooking-content');
+  if (btnContainerElement) {
+    btnContainerElement.addEventListener('click', function (e) {
+      const btnName = e.target.closest(`${showBtnName}`);
+      if (!btnName) return;
 
-if (btnIconContainer) {
-  btnIconContainer.addEventListener('click', function (e) {
-    const btnIcon = e.target.closest('.coffe-icon');
-    if (!btnIcon) return;
+      const btnDataset = btnName.dataset.btn;
+      buttonsElement.forEach(btn => btn.classList.remove('active'));
+      btnName.classList.add('active');
 
-    const btnIconDataset = btnIcon.dataset.btn;
-
-    btnsIconContent.forEach(btn => btn.classList.remove('active'));
-    btnIcon.classList.add('active');
-
-    cookingContents.forEach(cooking => cooking.classList.remove('active'));
-    document.querySelector(`.cooking-content__${btnIconDataset}`).classList.add('active');
-  });
+      contentBlocksElement.forEach(content => content.classList.remove('active'));
+      document.querySelector(`${contentBlocks}_${btnDataset}`).classList.add('active');
+    });
+  }
 }
 
-
+tabContent('.cooking-coffe', '.coffe-icon', '.cooking-content', '.coffe-icon');
+tabContent('.news-category', '.news-category button', '.wrapp-filter-news-posts', 'button');

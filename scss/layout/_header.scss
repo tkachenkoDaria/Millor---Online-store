@@ -99,81 +99,39 @@
   opacity: 0;
   position: absolute;
   transition: all 0.5s ease;
-  left: 290px;
+  left: 0;
+  width: 100%;
   z-index: -1;
-
-  @include responsive($xl) {
-    left: 235px;
-  }
-
-  @include responsive($lg) {
-    left: 0;
-    width: 100%;
-  }
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
 
   .yith-s {
     @extend %search_header;
   }
 
-  &>form {
-    display: flex;
-    align-items: center;
+  .close-wrap {
     position: relative;
     z-index: 4;
+    width: 30px;
+    cursor: pointer;
+  }
 
-    &>div {
-      transition: all 0.5s ease;
-      width: 0;
-    }
-
-    input[type="submit"] {
-      position: absolute;
-      z-index: 5;
-      left: 20px;
-      top: 16px;
-      background: url('../img/input-search-submit.svg') no-repeat;
-      width: 35px;
-      height: 35px;
-    }
-
-    .close-wrap {
-      position: absolute;
-      right: 20px;
-      z-index: 4;
-      top: 19px;
-      width: 40px;
-      cursor: pointer;
-    }
-
-    .close {
-      left: 14px;
-    }
+  .close {
+    left: 14px;
   }
 
   &.active {
     opacity: 1;
     z-index: 25;
-
-    &>form {
-      &>div {
-        width: 852px;
-
-        @include responsive($xxl) {
-          width: 700px;
-        }
-
-        @include responsive($xl) {
-          width: 615px;
-        }
-
-        @include responsive($lg) {
-          width: 100%;
-        }
-      }
-    }
   }
 }
 
+.search-result-item {
+  &__summary, .wp-block-button, &__inline_group, &__sku {
+    display: none !important;
+  }
+}
 
 .wc-block-mini-cart__badge {
   color: $basic-color-selective_yellow;
@@ -320,7 +278,8 @@
   width: 36px;
   margin-bottom: -15px;
   margin-left: 20px;
-cursor: pointer;
+  cursor: pointer;
+
   #one,
   #two,
   #three {

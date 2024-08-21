@@ -160,39 +160,11 @@ get_header();
 								);
 								$loop = new WP_Query($args);
 								if ($loop->have_posts()) {
-									while ($loop->have_posts()) : $loop->the_post();
-										$categories = get_the_terms($post->ID, "product_cat");
-										$product_vending = array(25, 110, 113, 111, 114, 112, 115, 116);
-										$product_coffee_drinks = array(104, 24, 109, 107, 105, 108, 106, 103);
-										$product_healthy = array(119, 120, 121, 117, 118);
-										foreach ($categories as $category) {
-											$cat_ids = $category->term_id;
-											global $product;
-											if ($cat_ids == 23) { ?>
-												<div class="swiper-slide">
-													<?php wc_get_template_part('content', 'archive-coffe'); ?>
-												</div>
-											<?php }
-
-											if (in_array($cat_ids, $product_vending)) { ?>
-												<div class="swiper-slide">
-													<?php wc_get_template_part('content', 'archive-vending'); ?>
-												</div>
-											<?php }
-
-											if (in_array($cat_ids, $product_coffee_drinks)) { ?>
-												<div class="swiper-slide">
-													<?php wc_get_template_part('content', 'archive-tea-healthy'); ?>
-												</div>
-											<?php }
-
-											if (in_array($cat_ids, $product_healthy)) { ?>
-												<div class="swiper-slide">
-													<?php wc_get_template_part('content', 'archive-tea-healthy'); ?>
-												</div>
-								<?php }
-										}
-									endwhile;
+									while ($loop->have_posts()) : $loop->the_post(); ?>
+										<div class="swiper-slide">
+											<?php get_template_part('template-file/archive-product'); ?>
+										</div>
+								<?php endwhile;
 								}
 								wp_reset_postdata();
 								?>

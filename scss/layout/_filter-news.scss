@@ -63,7 +63,12 @@
     }
   }
 }
-
+.wrapp-filter-news-posts{
+  display: none;
+  &.active{
+    display: block;
+  }
+}
 .pagination-news {
   display: flex;
   gap: 15px;

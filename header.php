@@ -56,9 +56,11 @@ global $woocommerce; ?>
 									<use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/img/svg-sprite.svg#icon-search"></use>
 								</svg>
 							</button>
-							<?php echo do_shortcode('[yith_woocommerce_ajax_search]'); ?>
+							<div class="yith-ajaxsearchform-container">
+								<?php echo do_shortcode('[yith_woocommerce_ajax_search]'); ?>
+							</div>
 							<div class="cart">
-								<a href="<?php echo $woocommerce->cart->get_cart_url() ?>" class="wc-block-mini-cart__button" aria-label="Cart Page">
+								<a href="<?php echo wc_get_cart_url() ?>" class="wc-block-mini-cart__button" aria-label="Cart Page">
 									<svg class="icon wc-block-mini-cart__icon">
 										<use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/img/svg-sprite.svg#icon-cart"></use>
 									</svg>
@@ -85,13 +87,10 @@ global $woocommerce; ?>
 					</div>
 					<div class="col-5 col-lg-4 col-xl-2">
 						<div class="button-group">
-							<?php get_sidebar('header'); ?>
-							<?php get_sidebar(); ?>
-
 							<?php
 							if (class_exists('WooCommerce')) { ?>
 								<div class="cart">
-									<a href="<?php echo $woocommerce->cart->get_cart_url() ?>" class="wc-block-mini-cart__button" aria-label="Cart Page">
+									<a href="<?php echo wc_get_cart_url() ?>" class="wc-block-mini-cart__button" aria-label="Cart Page">
 										<svg class="icon wc-block-mini-cart__icon">
 											<use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/img/svg-sprite.svg#icon-cart"></use>
 										</svg>

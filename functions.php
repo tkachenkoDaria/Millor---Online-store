@@ -159,8 +159,6 @@ function millor_scripts() {
 	wp_enqueue_script('millor-ajax-js');
 	global $wp_query;
 	$localize_var_args = array(
-		'posts' => json_encode($wp_query->query_vars), // everything about your loop is here
-		'cur_page' => get_query_var('paged') ? get_query_var('paged') : 1,
 		'max_page' => $wp_query->max_num_pages,
 		'ajaxurl' => admin_url('admin-ajax.php')
 	);
@@ -311,134 +309,62 @@ if (function_exists('acf_add_options_page')) {
 	));
 }
 
-/**
- *  Ajax load news-category
- */
-add_action('wp_ajax_load_posts_by_category', 'load_posts_by_category_callback');
-add_action('wp_ajax_nopriv_load_posts_by_category', 'load_posts_by_category_callback');
+function pagination_news($query, $currentPage) {
+	$pagination_args = [
+		'base'      => trailingslashit(home_url('/page/%#%/')), 
+		'format'    => 'page/%#%/', 
+		"current"   => $currentPage,
+		'total'     => $query->max_num_pages,
+		'prev_text' => __('«', 'millor'),
+		'next_text' => __('»', 'millor'),
+	];
+	echo '<div class="pagination-news">';
+	echo paginate_links($pagination_args);
+	echo '</div>';
+}
+function custom_rewrite_rules() {
+	add_rewrite_rule('^page/([0-9]+)/?', 'index.php?paged=$matches[1]', 'top');
+}
+add_action('init', 'custom_rewrite_rules');
 
-function load_posts_by_category_callback() {
-	$data = json_decode(file_get_contents("php://input"), true);
-	$category_id = (int) $data['category_id'];
+/**
+ *  Ajax load pagination for news-category
+ */
+
+add_action('wp_ajax_load_posts_by_page', 'load_posts_by_page');
+add_action('wp_ajax_nopriv_load_posts_by_page', 'load_posts_by_page');
+
+function load_posts_by_page() {
+	$paged = $_POST['page'];
+	$category_news = $_POST['category_news'];
+
 	$args = array(
-		'category__in' => $category_id,
+		'post_type'      => 'post',
 		'posts_per_page' => 2,
-		'paged' => 1,
+		'category__in'   => $category_news,
+		'paged'          => $paged,
 	);
 
 	$query = new WP_Query($args);
 
 	if ($query->have_posts()) {
-		ob_start();
+		ob_start(); 
 		while ($query->have_posts()) {
 			$query->the_post();
 			get_template_part('template-parts/content-filter-news', get_post_type());
 		}
-		$posts_html = ob_get_clean();
+		$html = ob_get_clean(); 
 
-		$big = 999999999;
-		$pagination_html = '<div class="pagination-news">';
-		$pagination_html .= wp_kses_post(paginate_links([
-			'base'    => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-			'format'  => '?paged=%#%',
-			'current' => 1,
-			'total'   => $query->max_num_pages,
-			'prev_text' => __('«', 'millor'),
-			'next_text' => __('»', 'millor'),
-		]));
-		$pagination_html .= '</div>';
+		ob_start(); 
 
-		wp_send_json_success(['posts' => $posts_html, 'pagination' => $pagination_html]);
-	} else {
-		wp_send_json_error('No posts found');
+		pagination_news($query, $paged);
+		$pagination = ob_get_clean(); 
 	}
 
 	wp_reset_postdata();
-	wp_die();
-}
 
-
-
-/**
- *  Ajax load pagination for news-category
- */
-add_action('wp_ajax_load_posts_by_page', 'load_posts_by_page_callback');
-add_action('wp_ajax_nopriv_load_posts_by_page', 'load_posts_by_page_callback');
-
-function load_posts_by_page_callback() {
-	$data = json_decode(file_get_contents("php://input"), true);
-
-	if (!isset($data['page']) || !isset($data['category_id'])) {
-		wp_send_json_error('Invalid request parameters');
-		wp_die();
-	}
-
-	$page = intval($data['page']);
-	$category_id = intval($data['category_id']);
-
-	$args = [
-		'post_type'      => 'post',
-		'posts_per_page' => 2,
-		'paged'          => $page,
-		'category__in'   => $category_id,
-	];
-
-	$query = new WP_Query($args);
-
-	if ($query->have_posts()) {
-		ob_start();
-		while ($query->have_posts()) {
-			$query->the_post();
-			get_template_part('template-parts/content-filter-news', get_post_type());
-		}
-		$posts_html = ob_get_clean();
-
-		$big = 999999999;
-		$pagination_html = '<div class="pagination-news">';
-		$pagination_html .= wp_kses_post(paginate_links([
-			'base'      => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-			'format'    => '?paged=%#%',
-			'current'   => max(1, $page),
-			'total'     => $query->max_num_pages,
-			'prev_text' => __('«', 'millor'),
-			'next_text' => __('»', 'millor'),
-		]));
-		$pagination_html .= '</div>';
-
-		wp_send_json_success(['posts' => $posts_html, 'pagination' => $pagination_html]);
-	} else {
-		wp_send_json_error('No posts found');
-	}
-
-	wp_reset_postdata();
-	wp_die();
-}
-
-
-/**
- *  Ajax load reviews for product
- */
-add_action('wp_ajax_load_more_reviews', 'load_more_reviews_callback');
-add_action('wp_ajax_nopriv_load_more_reviews', 'load_more_reviews_callback');
-
-function load_more_reviews_callback() {
-
-	$data = json_decode(file_get_contents("php://input"), true);
-
-	$paged = (int) $data['page'];
-	$product_id = (int) $data['product_id'];
-
-	$comments = get_comments([
-		'post_id' => $product_id,
-		'status' => 'approve'
-	]);
-
-	wp_list_comments([
-		'page'              => $paged,
-		'per_page' => 2,
-		'order' => 'DESC',
-		'callback' => 'woocommerce_comments',
-	], $comments);
+	$data = array('success' => true, 'html' => $html, 'pagination' => $pagination);
+	echo json_encode($data);
 
 	wp_die();
 }

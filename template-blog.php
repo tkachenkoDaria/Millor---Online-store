@@ -90,30 +90,34 @@ get_header();
 			<div class="col-12">
 				<div class="wrapp-filter-news">
 					<h3 class="filter-news-title"><?php esc_html_e('Новини:', 'millor'); ?></h3>
-					<?php
-					$all_categories = get_categories('hide_empty=0');
-					$category_link_array = array();
-					echo '<div class="news-category">';
-					$first_category = true;
-					foreach ($all_categories as $single_cat) {
-						$active_class = $first_category ? 'class="active"' : '';
-						$category_link_array[] = '<button ' . $active_class . ' value="' . $single_cat->term_id . '">' . $single_cat->name . '</button>';
-						$first_category = false;
-					}
-					echo implode('', $category_link_array);
-					echo '</div>';
-					?>
+					<?php $all_categories = get_categories('hide_empty=1'); ?>
+					<div class="news-category">
+						<?php
+						$count_button = '';
+						foreach ($all_categories as $categories) :
+							$count_button++;
+						?>
+							<button <?php if ($count_button == 1) : ?> class="active" <?php endif; ?> data-category-news="<?php echo $categories->term_id; ?>" data-btn="<?php echo $count_button; ?>"><?php echo $categories->name; ?></button>
+						<?php endforeach; ?>
+					</div>
 				</div>
 
-				<div class="wrapp-filter-news-posts">
-					<?php
-					global $post;
-					$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+			</div>
 
+			<?php
+			global $wp;
+			$count_post_block = '';
+			$paged_page = $wp_query->query["paged"];
+			foreach ($all_categories as $categories) :
+				$count_post_block++;
+				$category_news = $categories->term_id;
+			?>
+				<div class="wrapp-filter-news-posts wrapp-filter-news-posts_<?php echo $count_post_block;
+																			if ($count_post_block == 1) : ?> active<?php endif; ?>">
+					<?php
 					$args = array(
 						'posts_per_page' => 2,
-						'paged' => $paged,
-						'category__in' => 4,
+						'category__in' => $category_news,
 					);
 					$query = new WP_Query($args);
 
@@ -122,26 +126,15 @@ get_header();
 							$query->the_post();
 							get_template_part('template-parts/content-filter-news', get_post_type());
 						}
-						$big = 999999999;
-						echo '<div class="pagination-news">';
-						echo wp_kses_post(paginate_links([
-							'base'    => str_replace(
-								$big,
-								'%#%',
-								esc_url(get_pagenum_link($big))
-							),
-							'current' => max(1, get_query_var('paged')),
-							'total'   => $query->max_num_pages,
-							'prev_text' => __('«', 'millor'),
-							'next_text' => __('»', 'millor'),
-						]));
-						echo '</div>';
+						
+						pagination_news($query, max(1, get_query_var('paged')));
 					}
 					wp_reset_postdata();
 					?>
 				</div>
-			</div>
+			<?php endforeach; ?>
 		</div>
+	</div>
 </section>
 
 <?php get_template_part('template-file/content', 'faq'); ?>

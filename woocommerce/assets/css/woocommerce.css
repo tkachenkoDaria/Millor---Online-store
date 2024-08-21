@@ -2783,3 +2783,6 @@ body:not(.search-results) .twentysixteen .entry-summary {
         /* margin-top: 20px; */
     }
 }
+.vi-wpvs-variation-wrap-option >div:first-child{
+    display: none;
+}
