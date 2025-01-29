@@ -54,11 +54,11 @@ if (post_password_required()) {
                             <div class="product-card__inner-reviews">
 
                                 <?php
-                                $rating_count = $product->get_rating_count();
                                 $review_count = $product->get_review_count();
+                                $rating_count = $product->get_rating_counts();
                                 $average = $product->get_average_rating();
 
-                                if ($rating_count > 0) : ?>
+                                if ($rating_count && $average) : ?>
 
                                     <div class="card-reviews card-reviews_coffe product-card__card-reviews">
                                         <?php echo wc_get_rating_html($average, $rating_count); // WPCS: XSS ok. 
@@ -66,21 +66,22 @@ if (post_password_required()) {
                                     </div>
 
                                 <?php endif; ?>
-
-                                <div class="response">
-                                    <p>
-                                        <?php echo $product->get_average_rating(); ?>
-                                    </p>
-                                    <?php if (comments_open()) : ?>
-                                        <?php //phpcs:disable 
-                                        ?>
-                                        <div class="woocommerce-review-link" rel="nofollow">(
-                                            <?php printf(_n('%s відгук', '%s відгука', $review_count, 'woocommerce'), '<span class="count">' . esc_html($review_count) . '</span>'); ?>)
-                                        </div>
-                                        <?php // phpcs:enable 
-                                        ?>
-                                    <?php endif ?>
-                                </div>
+                                <?php if ($average): ?>
+                                    <div class="response">
+                                        <p>
+                                            <?php echo $average; ?>
+                                        </p>
+                                        <?php if (comments_open()) : ?>
+                                            <?php //phpcs:disable 
+                                            ?>
+                                            <div class="woocommerce-review-link" rel="nofollow">(
+                                                <?php printf(_n('%s відгук', '%s відгука', $review_count, 'woocommerce'), '<span class="count">' . esc_html($review_count) . '</span>'); ?>)
+                                            </div>
+                                            <?php // phpcs:enable 
+                                            ?>
+                                        <?php endif ?>
+                                    </div>
+                                <?php endif; ?>
                                 <!-- end rating -->
                             </div>
 

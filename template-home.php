@@ -252,7 +252,7 @@ get_header();
 		</div>
 	</div>
 </section>
-<section class="info-coffe" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(<?php the_field('home_info_coffe_img'); ?>) no-repeat center;">
+<section class="info-coffe" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(<?php the_field('home_info_coffe_img'); ?>) no-repeat center / cover;">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">

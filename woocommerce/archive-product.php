@@ -32,7 +32,6 @@ global $wp_query;
 $paged_page = $wp_query->query["paged"];
 $product_cat = get_queried_object();
 $cat_id = $product_cat->term_id;
-
 ?>
 
 
@@ -69,6 +68,12 @@ if (woocommerce_product_loop()) {
 						if (wc_get_loop_prop('total')) {
 							while (have_posts()) {
 								the_post();
+
+								/**
+								 * Hook: woocommerce_shop_loop.
+								 */
+								do_action('woocommerce_shop_loop');
+
 								get_template_part('template-file/archive-product');
 							}
 						}
@@ -76,13 +81,16 @@ if (woocommerce_product_loop()) {
 					</div>
 				</div>
 			</div>
-			<?php if (1 != $wp_query->max_num_pages) : ?>
+			<div class="pagination-news pagination-news_product">
+				<?php woocommerce_pagination(); ?>
+			</div>
+			<!-- <?php if (1 != $wp_query->max_num_pages) : ?>
 				<div class="row see-more-product-row">
 					<div class="col-12">
 						<button type="button" id="more-product" data-cat_id="<?php echo $cat_id; ?>" data-max_page="<?php echo $wp_query->max_num_pages; ?>" data-page="1" class="see-more-product"><?php esc_html_e('Показати ще', 'millor'); ?></button>
 					</div>
 				</div>
-			<?php endif; ?>
+			<?php endif; ?> -->
 		</div>
 	</section>
 <?php

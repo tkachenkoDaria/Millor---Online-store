@@ -1,4 +1,4 @@
-<div class="making-coffee <?php echo $args['section_class']; ?>" id="<?php echo $args['id']; ?>">
+<div class="making-coffee <?php echo $args['section_class']; ?>" <?php echo !empty($args['id']) ? 'id="' . esc_attr($args['id']).'"' : ''; ?>>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">

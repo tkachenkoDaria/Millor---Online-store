@@ -60,7 +60,7 @@ if ($category_style == 1): ?>
 
         // get an array of the WP_Term objects for a defined product ID
         $terms = wp_get_post_terms(get_the_id(), 'product_tag');
-
+        $product_description = $product->get_short_description();
         // Loop through each product tag for the current product
         if (count($terms) > 0) {
             foreach ($terms as $term) {
@@ -85,33 +85,19 @@ if ($category_style == 1): ?>
             <div class="card-coffe__items">
 
                 <?php
-                $rating_count = $product->get_rating_count();
                 $review_count = $product->get_review_count();
+                $rating_count = $product->get_rating_counts();
                 $average = $product->get_average_rating();
-
-                if ($rating_count > 0) : ?>
-
-                    <div class="woocommerce-product-rating card-reviews card-reviews_coffe">
-                        <?php echo wc_get_rating_html($average, $rating_count); // WPCS: XSS ok. 
-                        ?>
+                if ($review_count && $average): ?>
+                    <div class="response">
+                        <p> <?php echo $average; ?></p>
+                        <?php if (comments_open()) : ?>
+                            <div class="woocommerce-review-link" rel="nofollow">(
+                                <?php printf(_n('%s відгук', '%s відгука', $review_count, 'woocommerce'), '<span class="count">' . esc_html($review_count) . '</span>'); ?>)
+                            </div>
+                        <?php endif ?>
                     </div>
-
                 <?php endif; ?>
-
-                <div class="response">
-                    <p>
-                        <?php echo $product->get_average_rating(); ?>
-                    </p>
-                    <?php if (comments_open()) : ?>
-                        <?php //phpcs:disable 
-                        ?>
-                        <div class="woocommerce-review-link" rel="nofollow">(
-                            <?php printf(_n('%s відгук', '%s відгука', $review_count, 'woocommerce'), '<span class="count">' . esc_html($review_count) . '</span>'); ?>)
-                        </div>
-                        <?php // phpcs:enable 
-                        ?>
-                    <?php endif ?>
-                </div>
                 <!-- end rating -->
 
 
@@ -121,18 +107,10 @@ if ($category_style == 1): ?>
                     $termStrength = $product->get_attribute('pa_degree-of-roasting');
                     $termStrength = get_term_by('slug', $termStrength, 'pa_degree-of-roasting');
                     $imgCoffe = get_field('select_degree_of_roasting', 'pa_degree-of-roasting_' . $termStrength->term_id);
-
-                    if ($imgCoffe == 'one') : ?>
-                        <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/grain/grain.svg" alt="grain" width="24" height="24">
-                    <?php elseif ($imgCoffe == 'two') : ?>
-                        <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/grain/grain-2.svg" alt="grain-two" width="58" height="24">
-                    <?php elseif ($imgCoffe == 'three') : ?>
-                        <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/grain/grain-3.svg" alt="grain-three" width="92" height="24">
-                    <?php elseif ($imgCoffe == 'four') : ?>
-                        <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/grain/grain-4.svg" alt="grain-four" width="126" height="24">
-                    <?php elseif ($imgCoffe == 'five') : ?>
-                        <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/grain/grain-5.svg" alt="grain-five" width="160" height="24">
+                    if ($imgCoffe): ?>
+                        <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/grain/grain-<?php echo $imgCoffe; ?>.svg" alt="grain" width="<?php echo $imgCoffe * 24 ?>" height="24">
                     <?php endif; ?>
+
                 </div>
                 <!-- end strength-coffe -->
 
@@ -144,27 +122,8 @@ if ($category_style == 1): ?>
                         $termQuality = $product->get_attribute('pa_quality-coffe');
                         $termQuality = get_term_by('slug', $termQuality, 'pa_quality-coffe');
                         $imgCoffeQuality = get_field('select_strength_coffe', 'pa_quality-coffe_' . $termQuality->term_id);
-
-                        if ($imgCoffeQuality == 'one') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-1.svg" alt="grain" width="127" height="10">
-                        <?php elseif ($imgCoffeQuality == 'two') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-2.svg" alt="grain-two" width="127" height="10">
-                        <?php elseif ($imgCoffeQuality == 'three') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-3.svg" alt="grain-three" width="127" height="10">
-                        <?php elseif ($imgCoffeQuality == 'four') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-4.svg" alt="grain-four" width="127" height="10">
-                        <?php elseif ($imgCoffeQuality == 'five') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-5.svg" alt="grain-five" width="127" height="10">
-                        <?php elseif ($imgCoffeQuality == 'six') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-6.svg" alt="grain-six" width="127" height="10">
-                        <?php elseif ($imgCoffeQuality == 'seven') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-7.svg" alt="grain-seven" width="127" height="10">
-                        <?php elseif ($imgCoffeQuality == 'eight') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-8.svg" alt="grain-eight" width="127" height="10">
-                        <?php elseif ($imgCoffeQuality == 'nine') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-9.svg" alt="grain-nine" width="127" height="10">
-                        <?php elseif ($imgCoffeQuality == 'ten') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-10.svg" alt="grain-ten" width="127" height="10">
+                        if ($imgCoffeQuality): ?>
+                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-<?php echo $imgCoffeQuality; ?>.svg" alt="strength" width="127" height="24">
                         <?php endif; ?>
                     </div>
                 </div>
@@ -178,27 +137,8 @@ if ($category_style == 1): ?>
                         $termMustard = $product->get_attribute('pa_mustard-coffe');
                         $termMustard = get_term_by('slug', $termMustard, 'pa_mustard-coffe');
                         $imgCoffeMustard = get_field('select_mustard_coffe', 'pa_mustard-coffe_' . $termMustard->term_id);
-
-                        if ($imgCoffeMustard == 'one') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-1.svg" alt="grain" width="127" height="10">
-                        <?php elseif ($imgCoffeMustard == 'two') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-2.svg" alt="grain-two" width="127" height="10">
-                        <?php elseif ($imgCoffeMustard == 'three') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-3.svg" alt="grain-three" width="127" height="10">
-                        <?php elseif ($imgCoffeMustard == 'four') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-4.svg" alt="grain-four" width="127" height="10">
-                        <?php elseif ($imgCoffeMustard == 'five') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-5.svg" alt="grain-five" width="127" height="10">
-                        <?php elseif ($imgCoffeMustard == 'six') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-6.svg" alt="grain-six" width="127" height="10">
-                        <?php elseif ($imgCoffeMustard == 'seven') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-7.svg" alt="grain-seven" width="127" height="10">
-                        <?php elseif ($imgCoffeMustard == 'eight') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-8.svg" alt="grain-eight" width="127" height="10">
-                        <?php elseif ($imgCoffeMustard == 'nine') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-9.svg" alt="grain-nine" width="127" height="10">
-                        <?php elseif ($imgCoffeMustard == 'ten') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-10.svg" alt="grain-ten" width="127" height="10">
+                        if ($imgCoffeMustard): ?>
+                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-<?php echo $imgCoffeMustard; ?>.svg" alt="grain" width="127" height="24">
                         <?php endif; ?>
                     </div>
                 </div>
@@ -212,27 +152,8 @@ if ($category_style == 1): ?>
                         $termSaturation = $product->get_attribute('pa_saturation-coffe');
                         $termSaturation = get_term_by('slug', $termSaturation, 'pa_saturation-coffe');
                         $imgCoffeSaturation = get_field('select_saturation_coffe', 'pa_saturation-coffe_' . $termSaturation->term_id);
-
-                        if ($imgCoffeSaturation == 'one') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-1.svg" alt="grain" width="127" height="10">
-                        <?php elseif ($imgCoffeSaturation == 'two') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-2.svg" alt="grain-two" width="127" height="10">
-                        <?php elseif ($imgCoffeSaturation == 'three') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-3.svg" alt="grain-three" width="127" height="10">
-                        <?php elseif ($imgCoffeSaturation == 'four') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-4.svg" alt="grain-four" width="127" height="10">
-                        <?php elseif ($imgCoffeSaturation == 'five') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-5.svg" alt="grain-five" width="127" height="10">
-                        <?php elseif ($imgCoffeSaturation == 'six') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-6.svg" alt="grain-six" width="127" height="10">
-                        <?php elseif ($imgCoffeSaturation == 'seven') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-7.svg" alt="grain-seven" width="127" height="10">
-                        <?php elseif ($imgCoffeSaturation == 'eight') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-8.svg" alt="grain-eight" width="127" height="10">
-                        <?php elseif ($imgCoffeSaturation == 'nine') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-9.svg" alt="grain-nine" width="127" height="10">
-                        <?php elseif ($imgCoffeSaturation == 'ten') : ?>
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-10.svg" alt="grain-ten" width="127" height="10">
+                        if ($imgCoffeSaturation): ?>
+                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-<?php echo $imgCoffeSaturation; ?>.svg" alt="grain" width="127" height="24">
                         <?php endif; ?>
                     </div>
                 </div>
@@ -243,11 +164,12 @@ if ($category_style == 1): ?>
 
 
         <a class="goods-name-coffe" href="<?php echo get_permalink($product->get_id()); ?>"><?php echo $product->get_name(); ?></a>
-        <p class="goods-desc-coffe">
-            <?php echo $product->get_short_description(); ?>
-        </p>
+        <?php if ($product_description): ?>
+            <p class="goods-desc-coffe"> <?php echo $product_description; ?></p>
+        <?php endif; ?>
 
         <?php
+
         if ($product->is_type("variable") && $product->get_stock_status() == 'instock') :
             woocommerce_template_single_add_to_cart();
 
@@ -273,48 +195,40 @@ if ($category_style == 1): ?>
         ?>
     </div>
 <?php elseif ($category_style == 2): ?>
+
     <div <?php wc_product_class('card-tea card-coffe card-coffe_catalog', $product); ?>>
 
         <div class="card-tea__wrapp-top">
 
             <div class="card-tea__items">
                 <?php
-                $rating_count = $product->get_rating_count();
-                $review_count = $product->get_review_count();
-                $average = $product->get_average_rating();
-
                 if ($rating_count > 0) : ?>
 
                     <div class="card-reviews card-reviews_coffe">
-                        <?php echo wc_get_rating_html($average, $rating_count); // WPCS: XSS ok. 
-                        ?>
+                        <?php echo wc_get_rating_html($average, $rating_count);  ?>
                     </div>
 
                 <?php endif; ?>
-
-                <div class="response">
-                    <p>
-                        <?php echo $product->get_average_rating(); ?>
-                    </p>
-                    <?php if (comments_open()) : ?>
-                        <?php //phpcs:disable 
-                        ?>
-                        <div class="woocommerce-review-link" rel="nofollow">(
-                            <?php printf(_n('%s відгук', '%s відгука', $review_count, 'woocommerce'), '<span class="count">' . esc_html($review_count) . '</span>'); ?>)
-                        </div>
-                        <?php // phpcs:enable 
-                        ?>
-                    <?php endif ?>
-                </div>
+                <?php if ($average): ?>
+                    <div class="response">
+                        <p><?php echo $average; ?></p>
+                        <?php if (comments_open()) : ?>
+                            <div class="woocommerce-review-link" rel="nofollow">(
+                                <?php printf(_n('%s відгук', '%s відгука', $review_count, 'woocommerce'), '<span class="count">' . esc_html($review_count) . '</span>'); ?>)
+                            </div>
+                        <?php endif ?>
+                    </div>
+                <?php endif; ?>
                 <!-- end rating -->
 
             </div>
         </div>
         <img class="card-vending-img" src="<?php echo wp_get_attachment_url($product->get_image_id()); ?>" alt="product">
         <a class="goods-name-coffe card-tea__name" href="<?php echo get_permalink($product->get_id()); ?>"> <?php echo $product->get_name(); ?></a>
-        <p class="goods-desc-coffe card-tea__desc">
-            <?php echo $product->get_short_description(); ?>
-        </p>
+        <?php if ($product_description): ?>
+            <p class="goods-desc-coffe card-tea__desc"> <?php echo $product_description; ?></p>
+        <?php endif; ?>
+
 
         <?php
         if ($product->is_type("variable") && $product->get_stock_status() == 'instock') :
@@ -351,47 +265,38 @@ if ($category_style == 1): ?>
 
             <div class="card-tea__items">
                 <?php
-                $rating_count = $product->get_rating_count();
-                $review_count = $product->get_review_count();
-                $average = $product->get_average_rating();
-
                 if ($rating_count > 0) : ?>
-
                     <div class="card-reviews card-reviews_coffe">
-                        <?php echo wc_get_rating_html($average, $rating_count); // WPCS: XSS ok. 
-                        ?>
+                        <?php echo wc_get_rating_html($average, $rating_count); ?>
                     </div>
 
                 <?php endif; ?>
-
-                <div class="response">
-                    <p>
-                        <?php echo $product->get_average_rating(); ?>
-                    </p>
-                    <?php if (comments_open()) : ?>
-                        <?php //phpcs:disable 
-                        ?>
-                        <div class="woocommerce-review-link" rel="nofollow">(
-                            <?php printf(_n('%s відгук', '%s відгука', $review_count, 'woocommerce'), '<span class="count">' . esc_html($review_count) . '</span>'); ?>)
-                        </div>
-                        <?php // phpcs:enable 
-                        ?>
-                    <?php endif ?>
-                </div>
+                <?php if ($average): ?>
+                    <div class="response">
+                        <p> <?php echo $average; ?></p>
+                        <?php if (comments_open()) : ?>
+                            <div class="woocommerce-review-link" rel="nofollow">(
+                                <?php printf(_n('%s відгук', '%s відгука', $review_count, 'woocommerce'), '<span class="count">' . esc_html($review_count) . '</span>'); ?>)
+                            </div>
+                        <?php endif ?>
+                    </div>
+                <?php endif ?>
                 <!-- end rating -->
 
             </div>
         </div>
         <img class="card-tea__img" src="<?php echo wp_get_attachment_url($product->get_image_id()); ?>" alt="product">
         <a href="<?php echo get_permalink($product->get_id()); ?>" class="goods-name-coffe card-tea__name"> <?php echo $product->get_name(); ?> </a>
-        <p class="goods-desc-coffe card-tea__desc">
-            <?php echo $product->get_short_description(); ?>
-        </p>
+        <?php if ($product_description): ?>
+            <p class="goods-desc-coffe card-tea__desc"> <?php echo $product_description; ?></p>
+        <?php endif; ?>
+
 
 
         <?php
         if ($product->is_type("variable") && $product->get_stock_status() == 'instock') :
             woocommerce_template_single_add_to_cart();
+
 
         elseif ($product->is_type("simple") && $product->get_stock_status() == 'instock') :
             woocommerce_template_loop_price();

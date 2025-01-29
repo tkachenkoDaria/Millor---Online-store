@@ -108,30 +108,168 @@ const btnOpen = document.getElementById("open__btn");
 const molad = document.getElementById('wrapper-modal');
 const overlay = document.getElementById('overlay');
 const closeImg = document.getElementById('close-img');
+const body = document.querySelector('body');
+
 
 if (btnOpen) {
   btnOpen.addEventListener('click', () => {
     molad.classList.add('active');
+    body.classList.add('no-scroll');
   })
   const closeModal = () => {
     molad.classList.remove('active');
-
+    body.classList.remove('no-scroll');
   }
 
   closeImg.addEventListener('click', () => {
     molad.classList.remove('active');
+    body.classList.remove('no-scroll');
   })
 
   overlay.addEventListener('click', closeModal);
 }
 
+const handleClickSelectEvents = () => {
+  document.querySelectorAll('.product .variations').forEach((variations) => {
+   
+    variations.addEventListener('click', (e) => {
+      const btnOpen = e.target.closest('.btn-select-open');
+      if (!btnOpen) return;
 
+      const list = btnOpen.nextElementSibling;
+      const select = list.nextElementSibling;
+      const items = list.querySelectorAll('li');
+  
+      btnOpen.classList.toggle('active');
+      list.classList.toggle('active');
+
+      list.addEventListener('click', (e) => {
+        const target = e.target.closest('.select-list__item');
+        if (!target || target.classList.contains('select-list__item_none')) return;
+
+        const value = target.getAttribute('value');
+
+        items.forEach((option) => {
+          list.querySelectorAll('.select-list__item').forEach((item) => {
+            item.classList.remove('select-list__item_selected');
+            item.removeAttribute('selected');
+          });
+
+          target.classList.add('select-list__item_selected');
+          target.setAttribute('selected', 'selected');
+
+          btnOpen.textContent = value;
+          btnOpen.classList.remove('active');
+          list.classList.remove('active');
+
+          Array.from(select).forEach((option) => {
+            if (option.value === value) {
+              option.selected = true;
+              const changeEvent = new Event('change', { bubbles: true });
+              select.dispatchEvent(changeEvent);
+            }
+          });
+
+        });
+       
+      });
+      
+    });
+  });
+};
+handleClickSelectEvents();
+
+// const orderby = document.querySelectorAll('.orderby');
+// const woocommerceOrdering = document.querySelector('.woocommerce-ordering');
+// const woocommerceOrderings = document.querySelectorAll('.woocommerce-ordering');
+// if (orderby) {
+//   const selectListOrderby = document.createElement('ul');
+//   selectListOrderby.classList.add('select-list');
+
+//   const btnOrderbyOpen = document.createElement('button');
+//   btnOrderbyOpen.classList.add('btn-select-open');
+//   btnOrderbyOpen.setAttribute('type', 'button');
+
+//   woocommerceOrdering.prepend(selectListOrderby);
+//   woocommerceOrdering.prepend(btnOrderbyOpen);
+  
+
+//   Array.from(orderby[0]).forEach((option, index) => {
+//     const selectItem = document.createElement('li');
+//     selectItem.classList.add('select-list__item');
+//     selectItem.innerText = option.innerText;
+
+//     if (index === 0) {
+//       selectItem.classList.add('select-list__item_none');
+//     } else {
+//       selectItem.setAttribute('value', option.value);
+//       if (option.selected) {
+//         btnOrderbyOpen.innerText = option.innerText;
+//         selectItem.classList.add('select-list__item_selected');
+//       }
+//     }
+//     selectListOrderby.append(selectItem);
+//   });
+//     // handleClickEvents(woocommerceOrderings);
+// }
 
 
 
 // sort product
-
 let sortItemsCoffe = document.querySelector('.orderby');
+const btnSelectPpenOrderby = document.querySelector('.btn-select-open_orderby');
+const selectListOrderby = document.querySelector('.select-list_orderby');
+const selectListOrderbyItems = document.querySelectorAll('.select-list_orderby li');
+const orderbySelect = document.querySelector('.orderby_select');
+let textBtnSelectPpenOrderby = '';
+
+const selectListCustomOrderby = function () {
+
+  Array.from(orderbySelect.options).forEach((option) => {
+    if (option.selected) textBtnSelectPpenOrderby = option.textContent;
+  });
+
+  btnSelectPpenOrderby.textContent = textBtnSelectPpenOrderby;
+
+  btnSelectPpenOrderby.addEventListener('click', () => {
+    btnSelectPpenOrderby.classList.toggle('active');
+    selectListOrderby.classList.toggle('active');
+  });
+
+  selectListOrderby.addEventListener('click', (e) => {
+    let list = e.target.closest('.select-list__item');
+    if (!list) return;
+
+    const value = list.getAttribute('value');
+
+    selectListOrderbyItems.forEach((option) => {
+      selectListOrderbyItems.forEach((item) => {
+        item.classList.remove('select-list__item_selected');
+        item.removeAttribute('selected');
+      });
+
+      list.classList.add('select-list__item_selected');
+      list.setAttribute('selected', 'selected');
+
+      btnSelectPpenOrderby.textContent = list.textContent;
+      btnSelectPpenOrderby.classList.remove('active');
+      selectListOrderby.classList.remove('active');
+
+
+      Array.from(orderbySelect.options).forEach((option) => {
+        if (option.value === value) {
+          option.selected = true;
+          const changeEvent = new Event('change', { bubbles: true });
+          orderbySelect.dispatchEvent(changeEvent);
+        }
+      });
+
+    });
+  });
+
+}
+
+if (selectListOrderby) selectListCustomOrderby();
 
 // sort product coffee
 const urlCoffe = 'https://millor.daria-tkachenko.website/product-category/all-product/freshly-roasted-coffee';
@@ -171,3 +309,17 @@ const tabContent = function (btnContainer, buttons, contentBlocks, showBtnName) 
 
 tabContent('.cooking-coffe', '.coffe-icon', '.cooking-content', '.coffe-icon');
 tabContent('.news-category', '.news-category button', '.wrapp-filter-news-posts', 'button');
+
+const btnOpenFilter = document.querySelector('.open-filter');
+const sectionCoffeFilters = document.querySelector('.coffe-filters');
+const btnCloseFilter = document.querySelector('.btn-close-filter');
+if (btnOpenFilter) {
+  btnOpenFilter.addEventListener('click', function () {
+    sectionCoffeFilters.classList.add('active');
+    btnCloseFilter.classList.add('active');
+  })
+  btnCloseFilter.addEventListener('click', function () {
+    sectionCoffeFilters.classList.remove('active');
+    btnCloseFilter.classList.remove('active');
+  })
+}

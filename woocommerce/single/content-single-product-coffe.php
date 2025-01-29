@@ -53,18 +53,10 @@ if (post_password_required()) {
                                     $termStrength = $product->get_attribute('pa_degree-of-roasting');
                                     $termStrength = get_term_by('slug', $termStrength, 'pa_degree-of-roasting');
                                     $imgCoffe = get_field('select_degree_of_roasting', 'pa_degree-of-roasting_' . $termStrength->term_id);
-
-                                    if ($imgCoffe == 'one') : ?>
-                                        <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/grain/grain.svg" alt="grain">
-                                    <?php elseif ($imgCoffe == 'two') : ?>
-                                        <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/grain/grain-2.svg" alt="grain-two">
-                                    <?php elseif ($imgCoffe == 'three') : ?>
-                                        <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/grain/grain-3.svg" alt="grain-three">
-                                    <?php elseif ($imgCoffe == 'four') : ?>
-                                        <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/grain/grain-4.svg" alt="grain-four">
-                                    <?php elseif ($imgCoffe == 'five') : ?>
-                                        <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/grain/grain-5.svg" alt="grain-five">
+                                    if ($imgCoffe) : ?>
+                                        <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/grain/grain-<?php echo $imgCoffe ?>.svg" alt="grain">
                                     <?php endif; ?>
+
                                 </div>
                             </div>
                             <div class="product-card__inner-title">
@@ -92,11 +84,11 @@ if (post_password_required()) {
                             <div class="product-card__inner-reviews">
 
                                 <?php
-                                $rating_count = $product->get_rating_count();
                                 $review_count = $product->get_review_count();
+                                $rating_count = $product->get_rating_counts();
                                 $average = $product->get_average_rating();
 
-                                if ($rating_count > 0) : ?>
+                                if ($rating_count && $average) : ?>
 
                                     <div class="card-reviews card-reviews_coffe product-card__card-reviews">
                                         <?php echo wc_get_rating_html($average, $rating_count); // WPCS: XSS ok. 
@@ -104,21 +96,22 @@ if (post_password_required()) {
                                     </div>
 
                                 <?php endif; ?>
-
-                                <div class="response">
-                                    <p>
-                                        <?php echo $product->get_average_rating(); ?>
-                                    </p>
-                                    <?php if (comments_open()) : ?>
-                                        <?php //phpcs:disable 
-                                        ?>
-                                        <div class="woocommerce-review-link" rel="nofollow">(
-                                            <?php printf(_n('%s відгук', '%s відгука', $review_count, 'woocommerce'), '<span class="count">' . esc_html($review_count) . '</span>'); ?>)
-                                        </div>
-                                        <?php // phpcs:enable 
-                                        ?>
-                                    <?php endif ?>
-                                </div>
+                                <?php if ($average): ?>
+                                    <div class="response">
+                                        <p>
+                                            <?php echo $average; ?>
+                                        </p>
+                                        <?php if (comments_open()) : ?>
+                                            <?php //phpcs:disable 
+                                            ?>
+                                            <div class="woocommerce-review-link" rel="nofollow">(
+                                                <?php printf(_n('%s відгук', '%s відгука', $review_count, 'woocommerce'), '<span class="count">' . esc_html($review_count) . '</span>'); ?>)
+                                            </div>
+                                            <?php // phpcs:enable 
+                                            ?>
+                                        <?php endif ?>
+                                    </div>
+                                <?php endif; ?>
                                 <!-- end rating -->
                             </div>
 
@@ -133,27 +126,8 @@ if (post_password_required()) {
                                         $termQuality = $product->get_attribute('pa_quality-coffe');
                                         $termQuality = get_term_by('slug', $termQuality, 'pa_quality-coffe');
                                         $imgCoffeQuality = get_field('select_strength_coffe', 'pa_quality-coffe_' . $termQuality->term_id);
-
-                                        if ($imgCoffeQuality == 'one') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-1.svg" alt="grain">
-                                        <?php elseif ($imgCoffeQuality == 'two') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-2.svg" alt="grain-two">
-                                        <?php elseif ($imgCoffeQuality == 'three') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-3.svg" alt="grain-three">
-                                        <?php elseif ($imgCoffeQuality == 'four') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-4.svg" alt="grain-four">
-                                        <?php elseif ($imgCoffeQuality == 'five') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-5.svg" alt="grain-five">
-                                        <?php elseif ($imgCoffeQuality == 'six') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-6.svg" alt="grain-six">
-                                        <?php elseif ($imgCoffeQuality == 'seven') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-7.svg" alt="grain-seven">
-                                        <?php elseif ($imgCoffeQuality == 'eight') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-8.svg" alt="grain-eight">
-                                        <?php elseif ($imgCoffeQuality == 'nine') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-9.svg" alt="grain-nine">
-                                        <?php elseif ($imgCoffeQuality == 'ten') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-10.svg" alt="grain-ten">
+                                        if ($imgCoffeQuality) : ?>
+                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-<?php echo $imgCoffeQuality; ?>.svg" alt="grain">
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -164,27 +138,8 @@ if (post_password_required()) {
                                         $termMustard = $product->get_attribute('pa_mustard-coffe');
                                         $termMustard = get_term_by('slug', $termMustard, 'pa_mustard-coffe');
                                         $imgCoffeMustard = get_field('select_mustard_coffe', 'pa_mustard-coffe_' . $termMustard->term_id);
-
-                                        if ($imgCoffeMustard == 'one') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-1.svg" alt="grain">
-                                        <?php elseif ($imgCoffeMustard == 'two') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-2.svg" alt="grain-two">
-                                        <?php elseif ($imgCoffeMustard == 'three') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-3.svg" alt="grain-three">
-                                        <?php elseif ($imgCoffeMustard == 'four') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-4.svg" alt="grain-four">
-                                        <?php elseif ($imgCoffeMustard == 'five') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-5.svg" alt="grain-five">
-                                        <?php elseif ($imgCoffeMustard == 'six') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-6.svg" alt="grain-six">
-                                        <?php elseif ($imgCoffeMustard == 'seven') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-7.svg" alt="grain-seven">
-                                        <?php elseif ($imgCoffeMustard == 'eight') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-8.svg" alt="grain-eight">
-                                        <?php elseif ($imgCoffeMustard == 'nine') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-9.svg" alt="grain-nine">
-                                        <?php elseif ($imgCoffeMustard == 'ten') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-10.svg" alt="grain-ten">
+                                        if ($imgCoffeMustard): ?>
+                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-<?php echo $imgCoffeMustard; ?>.svg" alt="grain">
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -195,27 +150,8 @@ if (post_password_required()) {
                                         $termSaturation = $product->get_attribute('pa_saturation-coffe');
                                         $termSaturation = get_term_by('slug', $termSaturation, 'pa_saturation-coffe');
                                         $imgCoffeSaturation = get_field('select_saturation_coffe', 'pa_saturation-coffe_' . $termSaturation->term_id);
-
-                                        if ($imgCoffeSaturation == 'one') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-1.svg" alt="grain">
-                                        <?php elseif ($imgCoffeSaturation == 'two') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-2.svg" alt="grain-two">
-                                        <?php elseif ($imgCoffeSaturation == 'three') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-3.svg" alt="grain-three">
-                                        <?php elseif ($imgCoffeSaturation == 'four') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-4.svg" alt="grain-four">
-                                        <?php elseif ($imgCoffeSaturation == 'five') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-5.svg" alt="grain-five">
-                                        <?php elseif ($imgCoffeSaturation == 'six') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-6.svg" alt="grain-six">
-                                        <?php elseif ($imgCoffeSaturation == 'seven') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-7.svg" alt="grain-seven">
-                                        <?php elseif ($imgCoffeSaturation == 'eight') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-8.svg" alt="grain-eight">
-                                        <?php elseif ($imgCoffeSaturation == 'nine') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-9.svg" alt="grain-nine">
-                                        <?php elseif ($imgCoffeSaturation == 'ten') : ?>
-                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-10.svg" alt="grain-ten">
+                                        if ($imgCoffeSaturation): ?>
+                                            <img src="<?php bloginfo('template_url'); ?>/assets/img/coffe-filter/properties-coffe/properties-<?php echo $imgCoffeSaturation; ?>.svg" alt="grain">
                                         <?php endif; ?>
                                     </div>
                                 </div>

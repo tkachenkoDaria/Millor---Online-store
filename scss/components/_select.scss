@@ -3,9 +3,11 @@
   width: 100%;
   left: 60%;
   margin-bottom: -11px;
+
   @include responsive($xxl) {
     left: 55%;
   }
+
   @include responsive($breakpoint-small) {
     left: 47%;
   }
@@ -79,4 +81,109 @@
   color: $basic-color-selective_yellow;
   cursor: pointer;
   transition: color 0.2s ease-in-out;
+}
+
+.product .variations {
+  position: relative;
+}
+
+.product .variations select, .woocommerce-ordering select{
+ position: absolute;
+ z-index: -1;
+ visibility: hidden;
+ opacity: 0;
+ height: 0;
+}
+
+.product-all-wrapp .select-list {
+  width: 100% !important;
+  padding: 0;
+}
+
+.btn-select-open {
+  border: 1px solid $basic-color-selective_yellow;
+  padding: 10px;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    margin-left: 1rem;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" height="100" width="100"%3E%3Cpath d="M97.625 25.3l-4.813-4.89c-1.668-1.606-3.616-2.41-5.84-2.41-2.27 0-4.194.804-5.777 2.41L50 52.087 18.806 20.412C17.223 18.805 15.298 18 13.03 18c-2.225 0-4.172.804-5.84 2.41l-4.75 4.89C.813 26.95 0 28.927 0 31.23c0 2.346.814 4.301 2.439 5.865l41.784 42.428C45.764 81.174 47.689 82 50 82c2.268 0 4.215-.826 5.84-2.476l41.784-42.428c1.584-1.608 2.376-3.563 2.376-5.865 0-2.26-.792-4.236-2.375-5.932z"/%3E%3C/svg%3E');
+    background-size: cover;
+    transition: transform 0.7s ease;
+  }
+
+  .active {
+    &::after {
+      transform: rotate(180deg);
+      transition: transform 0.7s ease;
+    }
+  }
+}
+.woocommerce-ordering{
+  position: relative;
+}
+.tax-product_cat{
+  .select-list.active{
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.select-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: absolute;
+  visibility: hidden;
+  padding: 3px 0 20px;
+  opacity: 0;
+  background: $color-white;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    width: calc(100% - 40px);
+    z-index: 20000;
+    transition: visibility 0.7s ease, opacity 0.4s ease;
+  }
+
+  &__item {
+    @extend %select-background;
+    padding: 10px;
+    text-align: left;
+    line-height: normal;
+    cursor: pointer;
+    transition: background 0.7s ease;
+
+    &:hover {
+      background: $color-white;
+      transition: background 0.7s ease;
+    }
+
+    &_none {
+      visibility: hidden;
+      overflow: hidden;
+      height: 0;
+      padding: 0;
+    }
+
+    &_selected, &[selected="selected"] {
+      background: $basic-color-selective_yellow;
+      cursor: not-allowed;
+      color: $color-white;
+
+      &:hover {
+        background: $basic-color-selective_yellow;
+      }
+    }
+  }
 }

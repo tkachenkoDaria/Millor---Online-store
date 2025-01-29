@@ -1,181 +1,261 @@
 .coffe-filters {
   padding: 15px 0 20px;
+
+  @include responsive($sm) {
+    display: block;
+    visibility: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: visibility 0.7s ease, max-height 0.7s ease, opacity 0.3s ease;
+  }
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    max-height: 300rem;
+  }
+
 }
 
 .coffe-filter {
-  display              : grid;
-  grid-template-columns: 400px 1fr;
-  gap                  : 20px;
+  background: #ffffff;
+  box-shadow: $card-box_shadow_coffe-filter;
+  border-radius: $border_radius_card;
+  padding: 43px 15px;
+  height: 100%;
+  display: grid;
+  gap: 20px;
 
-  @include responsive($lg) {
-    grid-template-columns: 1fr;
+
+
+  @include responsive($xl) {
+    height: auto;
+  }
+
+  @include responsive($md) {
+    padding: 43px 30px;
   }
 
   @include responsive($sm) {
     display: block;
   }
 
-  &__one {
-    background   : #ffffff;
-    box-shadow   : $card-box_shadow_coffe-filter;
-    border-radius: $border_radius_card;
-    padding      : 30px;
-    display      : flex;
-    gap          : 30px;
 
-    &::before {
-      content      : '';
-      background   : #f9b300;
-      border-radius: 10px;
-      width        : 20px;
-      height       : 100%;
-      display      : block;
+  &_two {
+    display: block;
+  }
 
-      @include responsive($sm) {
-        height: auto;
-      }
+  &__wrapp {
+    display: flex;
+
+    @include responsive($xl) {
+      flex-direction: column;
     }
 
-    .bapf_head {
-      h3 {
-        font-size  : $h4-font_size;
-        font-weight: $h4-h5-weight_bold;
-      }
-    }
-
-    .bapf_sfilter {
-      .bapf_body {
-        margin-top: 46px;
-
-        ul {
-          display       : flex;
+    .coffe-filter__contents {
+      .coffe-filter__inner {
+        @include responsive($xl) {
+          justify-content: center;
           flex-direction: column;
-          gap           : 52px;
-
-          @include responsive($breakpoint_sm) {
-            gap: 20px;
-          }
-
-          li {
-            input+label::before {
-              margin-bottom: -5px;
-            }
-
-            span {
-              background-size    : auto !important;
-              background-position: left !important;
-              margin             : 0 0 0 17px;
-              width: 168px !important;
-            }
-          }
+          align-items: baseline;
         }
       }
+    }
+  }
+
+  &__background {
+    background: $basic-color-selective_yellow;
+    border-radius: 10px;
+    width: 15px;
+    margin-right: 30px;
+
+    @include responsive($xl) {
+      width: 100%;
+      height: 15px;
+    }
+  }
+
+  &__content-wrapp {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @include responsive($xl) {
+      height: auto;
+    }
+
+  }
+
+  &__name {
+    @extend %h4;
+    margin-bottom: 46px;
+
+    @include responsive($xxl) {
+      font-size: 25px;
+    }
+
+    @include responsive($xl) {
+      font-size: $h4-font_size;
+      margin: 30px 0;
     }
   }
 
   &__inner {
-    display              : grid;
-    grid-template-columns: repeat(5, 1fr);
-    justify-items        : center;
-    padding              : 36px 65px 36px 87px;
-    background           : #ffffff;
-    box-shadow           : $card-box_shadow_coffe-filter;
-    border-radius        : $border_radius_card;
-
-    &::before {
-      content      : '';
-      background   : #f9b300;
-      border-radius: 10px;
-      width        : 100%;
-      height       : 15px;
-      display      : block;
-      grid-column  : 1/6;
-      margin-bottom: 30px;
-
-      @include responsive($xl) {
-        grid-column: 1/3;
-      }
-
-      @include responsive($breakpoint_sm) {
-        grid-column: 1/2;
-      }
-    }
-
     @include responsive($xl) {
-      grid-template-columns: repeat(2, 1fr);
-      justify-items        : stretch;
-      padding              : 30px 50px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
     }
 
     @include responsive($md) {
-      padding: 30px;
-    }
-
-    @include responsive($sm) {
-      margin-top: 30px;
-    }
-
-    @include responsive($breakpoint_sm) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  &__two {
-    .bapf_head {
-      h3 {
-        font-size  : $h5-font_size;
-        font-weight: $h4-h5-weight_bold;
-      }
-    }
-
-    .bapf_sfilter {
-      .bapf_body {
-        margin: 30px 0;
-
-        ul {
-          display       : flex;
-          flex-direction: column;
-          gap           : 21px;
-        }
-      }
-    }
-
-    &:nth-child(1) {
-      grid-column: 1/2;
-    }
-
-    &:nth-child(2) {
-      grid-column: 2/4;
-    }
-
-    &:nth-child(3) {
-      grid-column: 4/6;
-    }
-
-    &:nth-child(4) {
-      grid-column: 1/3;
-    }
-
-    &:nth-child(5) {
-      grid-column: 3/5;
-    }
-
-    &:nth-child(6) {
-      grid-column: 5/6;
-      align-self : end;
-    }
-
-    @include responsive($xl) {
-      grid-column: auto !important;
+      flex-wrap: nowrap;
+      flex-direction: column;
     }
   }
 }
 
-.btn-reset {
-  margin: 0;
+.checkbox {
+  display: flex;
+  margin-bottom: 51px;
+  align-items: center;
+  gap: 10px;
 
-  .bapf_button {
-    @include button-base(0, 20px);
-    padding: 20px 30px;
+  @include responsive($md) {
+    margin-right: 20px;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+
+    @include responsive($md) {
+      margin-right: 0;
+    }
+  }
+
+  &_filter-two {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    align-items: baseline;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    @include responsive($xl) {
+      max-width: 100%;
+    }
+  }
+}
+
+
+.grain {
+  &-wrapp {
+    display: flex;
+  }
+}
+
+.coffe-filter__name_filter-two {
+  @extend %h5;
+  margin: 28px 0 30px;
+}
+
+.coffe-filter__wrapp_filter-two {
+  display: block;
+
+  .coffe-filter__content-wrapp {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    @include responsive($md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include responsive($sm) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  .coffe-filter__content {
+    &:nth-child(4) {
+      grid-column: 1/2;
+
+      @include responsive($md) {
+        grid-column: auto;
+      }
+    }
+
+    &:nth-child(5) {
+      grid-column: 2/4;
+
+      @include responsive($md) {
+        grid-column: auto;
+      }
+    }
+  }
+
+  label {
+    font-size: $font-size_medium;
+  }
+}
+
+.coffe-filter__background_filter-two {
+  height: 15px;
+  width: 100%;
+}
+
+.coffe-filter__name_size {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.coffe-filter_two {
+  padding: 45px 15px;
+  height: 100%;
+}
+
+.btn-reset {
+  @include button-base(5px, 20px);
+  padding: 10px;
+  width: calc(100% - 20px);
+  margin: 0 auto;
+}
+
+.button-filter {
+  padding: 20px 0;
+  display: none;
+
+  @include responsive($sm) {
+    display: block;
+  }
+
+  &-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .open-filter {
+    background: none;
+
+    &:hover {
+      color: $basic-color-hover_selective_yellow;
+      transition: color 0.7s ease;
+    }
+  }
+  .btn-close-filter{
+    visibility: hidden;
+    opacity: 0;
+    padding: 5px;
+    background: none;
+    transition: visibility 0.7s ease, opacity 0.7s ease;
+    svg path{
+      stroke: $basic-color-hover_selective_yellow;
+    }
+    &.active{
+      visibility: visible;
+      opacity: 1;
+    }
   }
 }

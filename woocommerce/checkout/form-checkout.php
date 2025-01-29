@@ -51,23 +51,25 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 	<?php endif; ?>
 
 	<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
+
 	<div class="order-review-wrap">
 
 		<div class="wrap-coupon">
-
 			<div class="coupon-form" style="margin-bottom:20px;">
 				<h3><?php esc_html_e('Промокод', 'millor'); ?></h3>
 				<p><?php esc_html_e('Введіть подарунковий промокод в поле нижче і отримайте знижку на замовлення до 20%. Знижка не поширюється на доставку', 'millor'); ?></p>
-				<p class="form-row form-row-first woocommerce-validated">
-					<input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_html_e('Код промокоду', 'millor'); ?>" id="coupon_code" value="">
-				</p>
-				<p class="form-row form-row-last">
-					<button type="button" class="button" name="apply_coupon" value="<?php esc_html_e('Застосувати промокод', 'millor'); ?>"><?php esc_html_e('Застосувати промокод', 'millor'); ?></button>
-				</p>
+					<p class="form-row woocommerce-validated">
+						<input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_html_e('Код промокоду', 'millor'); ?>" id="coupon_code" value="">
+					</p>
+					<p class="form-row">
+						<button type="submit" class="button" name="apply_coupon" value="<?php esc_html_e('Застосувати промокод', 'millor'); ?>"><?php esc_html_e('Застосувати промокод', 'millor'); ?></button>
+					</p>
 				<div class="clear"></div>
 			</div>
 		</div>
-		<?php do_action('woocommerce_checkout_before_order_review'); ?>
+		<?php
+	
+		do_action('woocommerce_checkout_before_order_review'); ?>
 
 		<div id="order_review" class="woocommerce-checkout-review-order">
 			<?php do_action('woocommerce_checkout_order_review'); ?>

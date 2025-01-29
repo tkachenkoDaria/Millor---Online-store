@@ -37,6 +37,13 @@ function woo_remove_product_tabs($tabs) {
 // review single page product
 add_filter('comment_form_defaults', 'render_pros_cons_fields_for_anonymous_users', 10, 1);
 add_action('comment_form_top', 'render_pros_cons_fields_for_authorized_users');
+
+/**
+ *  WooCommerce filter .
+ */
+require get_template_directory() . '/inc/woocommerce-filter.php';
+
+
 function get_pros_cons_fields_html() {
 	ob_start();
 ?>
@@ -109,10 +116,8 @@ function add_pros_and_cons_to_review_text($text) {
 
 
 
-add_action('woocommerce_before_checkout_form', 'hide_checkout_coupon_form', 5);
-function hide_checkout_coupon_form() {
-	echo '<style>.woocommerce-form-coupon-toggle {display:none;}</style>';
-}
+
+remove_action('woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10);
 
 
 // jQuery code
@@ -122,28 +127,43 @@ function custom_checkout_jquery_script() {
 	?>
 		<script type="text/javascript">
 			jQuery(function($) {
-
-				$('.checkout-coupon-toggle .show-coupon').on('click', function(e) {
-					$('.coupon-form').toggle(200);
+				$('.coupon-form button[name="apply_coupon"]').on('click', function(e) {
 					e.preventDefault();
-				})
+					var couponCode = $('.coupon-form input[name="coupon_code"]').val();
 
-
-				$('.coupon-form input[name="coupon_code"]').on('input change', function() {
-					$('form.checkout_coupon input[name="coupon_code"]').val($(this).val());
-
-				});
-
-
-				$('.coupon-form button[name="apply_coupon"]').on('click', function() {
-					$('form.checkout_coupon').submit();
-
+					if (couponCode) {
+						$.ajax({
+							type: 'POST',
+							url: wc_checkout_params.ajax_url,
+							data: {
+								security: wc_checkout_params.apply_coupon_nonce,
+								coupon_code: couponCode,
+								action: 'woocommerce_apply_coupon'
+							},
+							beforeSend: function() {
+								$('.woocommerce-error, .woocommerce-message').remove();
+							},
+							success: function(response) {
+								$('body').trigger('update_checkout');
+								if (!response.success) {
+									$('.coupon-form').prepend(response);
+								}
+							},
+							error: function() {
+								$('.coupon-form').prepend('<div class="woocommerce-error">Виникла помилка. Спробуйте ще раз.</div>');
+							}
+						});
+					} else {
+						$('.coupon-form').prepend('<div class="woocommerce-error">Будь ласка, введіть код купону.</div>');
+					}
 				});
 			});
 		</script>
 	<?php
 	endif;
 }
+
+
 
 // Update counter for icon cart
 add_filter('woocommerce_add_to_cart_fragments', 'wc_refresh_mini_cart_count');
@@ -217,55 +237,54 @@ function show_child_category($class_block, $id_parent, $slug_parent, $class_cate
 
 
 
-
-
 /**
  * Load More Products with AJAX
  * 
  */
 
-add_action('wp_ajax_load_more_product', 'load_more_product');
-add_action('wp_ajax_nopriv_load_more_product', 'load_more_product');
+// add_action('wp_ajax_load_more_product', 'load_more_product');
+// add_action('wp_ajax_nopriv_load_more_product', 'load_more_product');
 
-function load_more_product() {
+// function load_more_product() {
 
-	$paged = $_POST['page'];
-	$cat_id = $_POST['cat_id'];
-	$paged++;
+// 	$paged = $_POST['page'];
+// 	$cat_id = $_POST['cat_id'];
+// 	$paged++;
 
-	$args = [
-		'post_type' => 'product',
-		'posts_per_page' => 12,
-		'post_status' => 'publish',
-		'paged'     => $paged,
-		'tax_query' => array(
-			array(
-				'taxonomy' => 'product_cat',
-				'field'    => 'id',
-				'terms'    => $cat_id,
-			),
-		)
-	];
+// 	$args = [
+// 		'post_type' => 'product',
+// 		'posts_per_page' => 9,
+// 		'post_status' => 'publish',
+// 		'paged'     => $paged,
+// 		'tax_query' => array(
+// 			array(
+// 				'taxonomy' => 'product_cat',
+// 				'field'    => 'id',
+// 				'terms'    => $cat_id,
+// 			),
+// 		)
+// 	];
 
-	$query = new WP_Query($args);
-	$html  = '';
+// 	$query = new WP_Query($args);
+// 	$html  = '';
 
 
-	if ($query->have_posts()):
-		ob_start();
-		while ($query->have_posts()): $query->the_post();
-			get_template_part('template-file/archive-product');
-		endwhile;
-		$html = ob_get_clean();
+// 	if ($query->have_posts()):
+// 		ob_start();
+// 		while ($query->have_posts()): $query->the_post();
+// 			get_template_part('template-file/archive-product');
+// 		endwhile;
 
-	endif;
-	wp_reset_postdata();
+// 		$html = ob_get_clean();
 
-	$data = array('success' => true, 'html' => $html);
-	echo json_encode($data);
+// 	endif;
+// 	wp_reset_postdata();
 
-	wp_die();
-}
+// 	$data = array('success' => true, 'html' => $html, 'page'=> $paged);
+// 	echo json_encode($data);
+
+// 	wp_die();
+// }
 
 
 
@@ -297,7 +316,6 @@ function load_more_reviews() {
 
 	$data = array('success' => true, 'html' => $html);
 	echo json_encode($data);
-	
 	wp_die();
 }
 
@@ -310,3 +328,123 @@ function custom_comments_per_page() {
 	}
 }
 add_action('template_redirect', 'custom_comments_per_page');
+
+
+// New dropdown_variation
+if (! function_exists('wc_dropdown_variation_attribute_options')) {
+
+	/**
+	 * Output a list of variation attributes for use in the cart forms.
+	 *
+	 * @param array $args Arguments.
+	 * @since 2.4.0
+	 */
+	function wc_dropdown_variation_attribute_options($args = array()) {
+		$args = wp_parse_args(
+			apply_filters('woocommerce_dropdown_variation_attribute_options_args', $args),
+			array(
+				'options'          => false,
+				'attribute'        => false,
+				'product'          => false,
+				'selected'         => false,
+				'name'             => '',
+				'id'               => '',
+				'class'            => '',
+				'show_option_none' => __('Choose an option', 'woocommerce'),
+			)
+		);
+
+		// Get selected value.
+		if (false === $args['selected'] && $args['attribute'] && $args['product'] instanceof WC_Product) {
+			$selected_key = 'attribute_' . sanitize_title($args['attribute']);
+			// phpcs:disable WordPress.Security.NonceVerification.Recommended
+			$args['selected'] = isset($_REQUEST[$selected_key]) ? wc_clean(wp_unslash($_REQUEST[$selected_key])) : $args['product']->get_variation_default_attribute($args['attribute']);
+			// phpcs:enable WordPress.Security.NonceVerification.Recommended
+		}
+
+		$options          = $args['options'];
+		$product          = $args['product'];
+		$attribute        = $args['attribute'];
+		$name             = $args['name'] ? $args['name'] : 'attribute_' . sanitize_title($attribute);
+		$id               = $args['id'] ? $args['id'] : sanitize_title($attribute);
+		$class            = $args['class'];
+		$show_option_none = (bool) $args['show_option_none'];
+		$checked_value    = '';
+
+		if (empty($options) && ! empty($product) && ! empty($attribute)) {
+			$attributes = $product->get_variation_attributes();
+			$options    = $attributes[$attribute];
+		}
+
+		if (! empty($options)) {
+			if ($product && taxonomy_exists($attribute)) {
+				$terms = wc_get_product_terms(
+					$product->get_id(),
+					$attribute,
+					array(
+						'fields' => 'all',
+					)
+				);
+				foreach ($options as $option) {
+					if ($option === $args['selected']) {
+						$checked_value = $option;
+					}
+				}
+			}
+		}
+
+		// Button + List
+		$html  = '<button class="btn-select-open" id="' . esc_attr($id) . '-btn" type="button">' . esc_html($checked_value ? $checked_value : __('Choose an option', 'woocommerce')) . '</button>';
+		$html .= '<ul id="' . esc_attr($id) . '" class="select-list ' . esc_attr($class) . '" name="' . esc_attr($name) . '" data-attribute_name="attribute_' . esc_attr(sanitize_title($attribute)) . '" data-show_option_none="' . ($show_option_none ? 'yes' : 'no') . '">';
+
+		if (! empty($options)) {
+			if ($product && taxonomy_exists($attribute)) {
+				$terms = wc_get_product_terms(
+					$product->get_id(),
+					$attribute,
+					array(
+						'fields' => 'all',
+					)
+				);
+
+				foreach ($terms as $term) {
+					if (in_array($term->slug, $options, true)) {
+						$html .= '<li class="select-list__item" value="' . esc_attr($term->slug) . '" ' . selected(sanitize_title($args['selected']), $term->slug, false) . '>' . esc_html(apply_filters('woocommerce_variation_option_name', $term->name, $term, $attribute, $product)) . '</li>';
+					}
+				}
+			} else {
+				foreach ($options as $option) {
+					$selected = sanitize_title($args['selected']) === $args['selected'] ? selected($args['selected'], sanitize_title($option), false) : selected($args['selected'], $option, false);
+					$html    .= '<li class="select-list__item" value="' . esc_attr($option) . '" ' . $selected . '>' . esc_html(apply_filters('woocommerce_variation_option_name', $option, null, $attribute, $product)) . '</li>';
+				}
+			}
+		}
+
+		$html .= '</ul>';
+
+		// Standard Select
+		$html .= '<select id="' . esc_attr($id) . '-select" class="' . esc_attr($class) . '" name="' . esc_attr($name) . '" data-attribute_name="attribute_' . esc_attr(sanitize_title($attribute)) . '">';
+		if ($show_option_none) {
+			$html .= '<option value="">' . esc_html(__('Choose an option', 'woocommerce')) . '</option>';
+		}
+		if (! empty($options)) {
+			if ($product && taxonomy_exists($attribute)) {
+				foreach ($terms as $term) {
+					if (in_array($term->slug, $options, true)) {
+						$html .= '<option value="' . esc_attr($term->slug) . '" ' . selected(sanitize_title($args['selected']), $term->slug, false) . '>' . esc_html(apply_filters('woocommerce_variation_option_name', $term->name, $term, $attribute, $product)) . '</option>';
+					}
+				}
+			} else {
+				foreach ($options as $option) {
+					$selected = sanitize_title($args['selected']) === $args['selected'] ? selected($args['selected'], sanitize_title($option), false) : selected($args['selected'], $option, false);
+					$html    .= '<option value="' . esc_attr($option) . '" ' . $selected . '>' . esc_html(apply_filters('woocommerce_variation_option_name', $option, null, $attribute, $product)) . '</option>';
+				}
+			}
+		}
+
+		$html .= '</select>';
+
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo apply_filters('woocommerce_dropdown_variation_attribute_options_html', $html, $args);
+	}
+}

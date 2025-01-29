@@ -10,6 +10,9 @@ body {
   @include responsive($breakpoint-small) {
     font-size: $font-size_medium;
   }
+  &.no-scroll{
+    overflow: hidden;
+  }
 }
 
 h1 {

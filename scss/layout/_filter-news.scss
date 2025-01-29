@@ -63,12 +63,15 @@
     }
   }
 }
-.wrapp-filter-news-posts{
+
+.wrapp-filter-news-posts {
   display: none;
-  &.active{
+
+  &.active {
     display: block;
   }
 }
+
 .pagination-news {
   display: flex;
   gap: 15px;
@@ -85,9 +88,10 @@
     justify-content: center;
     border-radius: 5px;
     transition: border 0.7s ease;
-    &.current{
+
+    &.current {
       border: 1px solid #F9B300;
-        background: #FFF7E1;
+      background: #FFF7E1;
     }
   }
 
@@ -95,6 +99,34 @@
     &:hover {
       border: 1px solid #F9B300;
       transition: border 0.7s ease;
+    }
+  }
+}
+
+.pagination-news.pagination-news_product {
+  justify-content: center;
+  .page-numbers {
+    margin: 30px 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    border: 0;
+li{
+    border: 0;
+}
+    li span.current {
+      background: #FFF7E1;
+      border: 1px solid #F9B300;
+          color: #F9B300;
+    }
+    a {
+      border: 1px solid #C9C9C9;
+      background: none;
+      &:hover{
+        background: none;
+        border: 1px solid #F9B300;
+            color: #F9B300;
+      }
     }
   }
 }
